@@ -1,0 +1,44 @@
+<company>
+	<regola>
+		<antecedenti>
+			<antecedente>
+				<firstsensore>sens0_Temperatura</firstsensore>
+				<firstinforil>gradi</firstinforil>
+				<oprel>&lt;</oprel>
+				<costante>20</costante>
+			</antecedente>
+			<antecedente>
+				<firstsensore>sens2_Temperatura</firstsensore>
+				<firstinforil>gradi</firstinforil>
+				<oprel>&gt;</oprel>
+				<secondsensore>sens0_Temperatura</secondsensore>
+				<secondinforil>gradi</secondinforil>
+			</antecedente>
+		</antecedenti>
+		<conseguenti>
+			<conseguente>
+				<attuatore>att0_Temperatura</attuatore>
+				<modop>Idle</modop>
+			</conseguente>
+		</conseguenti>	
+	</regola>
+	<regola>
+		<antecedenti>
+			<antecedente>
+				<firstsensore>sens2_Temperatura</firstsensore>
+				<firstinforil>gradi</firstinforil>
+				<oprel>&lt;</oprel>
+				<costante>20</costante>
+			</antecedente>
+		</antecedenti>
+		<conseguenti>
+			<conseguente>
+				<attuatore>att2_AzionaAllarme</attuatore>
+				<modop>Idle</modop>
+			</conseguente>
+		</conseguenti>
+	</regola>
+</company>
+
+	
+	
