@@ -18,6 +18,7 @@ import rilevazione.UnitaRilevazione;
 public class UnitaImmobiliare implements Serializable{
 	
 	//MICHELA MICHELA 
+	//ASI A ASI A ASIA asiaaaaa
 	
 	private static final long serialVersionUID = 1L;
 	private String destinazione;
