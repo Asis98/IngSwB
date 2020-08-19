@@ -17,7 +17,8 @@ import rilevazione.UnitaRilevazione;
  */
 public class UnitaImmobiliare implements Serializable{
 	
-
+	//ASIA ASIA ASIA
+	
 	private static final long serialVersionUID = 1L;
 	private String destinazione;
 	private ArrayList<UnitaDomotica> unitList;
