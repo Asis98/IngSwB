@@ -114,29 +114,5 @@ public class AntecedenteTime implements Antecedente, Serializable{
 		return sb.toString();
 	}
 
-	/**
-	 * Gets the sensore antecedente.
-	 *
-	 * @pre: -
-	 * @post: -
-	 */
-	@Override
-	public Sensore getSensoreAntecedente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * Stampa antecedente.
-	 *
-	 * @pre: -
-	 * @post: -
-	 * @return the string
-	 */
-	@Override
-	public String stampaSensoreAntecedente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

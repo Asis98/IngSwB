@@ -1,32 +1,10 @@
 package utenti;
 
+import ambiente.UnitaImmobiliare;
 import costanti.Costanti;
 
-public class Utente {
+public interface Utente {
 
-	private String nomeUtente;
-	
-	/**
-	 * Instantiates a new utente.
-	 *
-	 * @param nomeUtente 
-	 * @pre: nomeUtente!=null
-	 * @post: -
-	 * @invariant: nomeUtente!=null 
-	 */
-	public Utente(String nomeUtente)
-	{
-		this.nomeUtente = nomeUtente;
-	}
-	
-	/**
-	 * Instantiates a new utente.
-	 */
-	public Utente()
-	{
-		this.nomeUtente = Costanti.STRINGA_VUOTA;
-	}
-	
 	/**
 	 * Gets the nome utente.
 	 * 
@@ -34,10 +12,7 @@ public class Utente {
 	 * @post: -
 	 * @return nomeUtente
 	 */
-	public String getNomeUtente()
-	{
-		return nomeUtente;
-	}
+	public String getNomeUtente();
 	
 	/**
 	 * Sets the nome utente.
@@ -46,9 +21,10 @@ public class Utente {
 	 * @pre: nomeUtente!=null
 	 * @post: -
 	 */
-	public void setNomeUtente(String nomeUtente)
-	{
-		this.nomeUtente = nomeUtente; 
-	}
+	public void setNomeUtente(String nomeUtente);
+	
+	public void menuPersonalizzato();
+	
+	public void gestioneImmobileView();
 	
 }

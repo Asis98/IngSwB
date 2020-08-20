@@ -19,26 +19,11 @@ public class BooleanOperator {
 	        // more operators
 	    }
 	 
-	    /**
-    	 * Gets the operation.
-    	 *
-    	 * @param operator 
-    	 * @pre: operator!=null
-    	 * @post: -
-    	 * @return the operation
-    	 */
     	public static Optional<BoolFunct> getOperation(String operator) 
 	    {
 	        return Optional.ofNullable(operationMap.get(operator));
 	    }
 	    
-	    /**
-    	 * Stampa operatore.
-    	 *
-    	 * @pre: -
-    	 * @post: sb!=null
-    	 * @return the String
-    	 */
     	public static String stampaOperatore()
 	    {
 	    	int i =0;

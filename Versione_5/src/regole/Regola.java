@@ -291,12 +291,12 @@ public class Regola implements Serializable{
 		for(int i=0; i<listaAntecedenti.size(); i++)
 		{
 			if(listaAntecedenti.get(i) instanceof AntecedenteSensore && 
-			   (((AntecedenteSensore)listaAntecedenti.get(i)).getSensoreAntecedente().getStato() == Stato.SPENTO ||
-			   ((AntecedenteSensore)listaAntecedenti.get(i)).getOperando_b().getStato() == Stato.SPENTO))
+			   (((AntecedenteSensore)listaAntecedenti.get(i)).getStatoSensoreA() == Stato.SPENTO ||
+			   ((AntecedenteSensore)listaAntecedenti.get(i)).getStatoSensoreB() == Stato.SPENTO))
 			{
 				return false;
 			}
-			else if(listaAntecedenti.get(i).getSensoreAntecedente().getStato() == Stato.SPENTO)
+			else if(((AntecedenteCostante)listaAntecedenti.get(i)).getStatoSensoreA() == Stato.SPENTO)
 			{
 				return false;
 			}
@@ -316,7 +316,7 @@ public class Regola implements Serializable{
 	{
 		for(int i=0; i<listaConseguenti.size(); i++)
 		{
-			if(listaConseguenti.get(i).getAttuatore().getStato() == Stato.SPENTO)
+			if(listaConseguenti.get(i).getStatoConseguente() == Stato.SPENTO)
 				return false;
 		}
 		
@@ -338,11 +338,11 @@ public class Regola implements Serializable{
 		{
 			//verifica che sensore.nomeUnita sia uguale a operando_a.nomeUnita o operando_b.nomeUnita
 			if(listaAntecedenti.get(i) instanceof AntecedenteSensore 
-				&& (listaAntecedenti.get(i).getSensoreAntecedente().getNomeUnita().equalsIgnoreCase(sensore.getNomeUnita())
-				|| ((AntecedenteSensore)listaAntecedenti.get(i)).getOperando_b().getNomeUnita().equalsIgnoreCase(sensore.getNomeUnita())))
+				&& (((AntecedenteSensore)listaAntecedenti.get(i)).getSensoreAntecedente().equalsIgnoreCase(sensore.getNomeUnita())
+				|| ((AntecedenteSensore)listaAntecedenti.get(i)).getOperando_b().equalsIgnoreCase(sensore.getNomeUnita())))
 				return true;
 			//verifica che sensore.nomeUnita sia uguale a operando_a.nomeUnita
-			else if(listaAntecedenti.get(i).getSensoreAntecedente().getNomeUnita().equalsIgnoreCase(sensore.getNomeUnita()))
+			else if(((AntecedenteCostante)listaAntecedenti.get(i)).getSensoreAntecedente().equalsIgnoreCase(sensore.getNomeUnita()))
 					return true;
 		}
 		return false;
@@ -361,7 +361,7 @@ public class Regola implements Serializable{
 	{
 		for(int i=0;i<listaConseguenti.size();i++)
 		{
-			if(listaConseguenti.get(i).getAttuatore().getNomeUnita().equalsIgnoreCase(attuatore.getNomeUnita()))
+			if(listaConseguenti.get(i).getNomeConseguente().equalsIgnoreCase(attuatore.getNomeUnita()))
 				return true;
 		}
 		return false;

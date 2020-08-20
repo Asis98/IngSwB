@@ -1,5 +1,6 @@
 package regole;
 
+import categorie.Stato;
 import rilevazione.Sensore;
 
 public interface Antecedente{
@@ -33,21 +34,5 @@ public interface Antecedente{
 	 */
 	public String stampaAntecedente();
 	
-	/**
-	 * Gets the sensore antecedente.
-	 * 
-	 * @pre: -
-	 * @post: -
-	 * @return the sensore antecedente
-	 */
-	public Sensore getSensoreAntecedente();
 	
-	/**
-	 * Stampa sensore antecedente.
-	 * 
-	 * @pre: -
-	 * @post: -
-	 * @return the string
-	 */
-	public String stampaSensoreAntecedente();
 }

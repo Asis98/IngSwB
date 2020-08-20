@@ -43,7 +43,8 @@ public class VociMenu {
 													"Visualizza Lista Categorie",
 													};
 	
-	public static final String[] VOCIUTENTE = { Costanti.UTENTE1, Costanti.UTENTE2 };
+	public static final String[] VOCIUTENTE = { Costanti.UTENTE1, Costanti.UTENTE2};
+	
 	public static final String[] VOCIREGOLE = { "Antecedente che ha come operatori due variabili sensoriali", 
 												"Antecedente che ha come operatori una variabile sensoriale e una costante",
 												"Antecedente che ha come operatori una variabile sensoriale e una temporale"};

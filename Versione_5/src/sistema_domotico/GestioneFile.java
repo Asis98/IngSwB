@@ -16,17 +16,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import ambiente.ListaUnitaImmobiliari;
 import ambiente.UnitaImmobiliare;
 import categorie.CategoriaAttuatori;
 import categorie.CategoriaSensori;
-import categorie.ListaCategorie;
 import categorie.ModalitaOperativa;
 import categorie.ValoreNonNumerico;
 import categorie.ValoreNumerico;
 import costanti.Costanti;
 import costanti.Messaggi;
 import it.unibs.fp.mylib.ServizioFile;
+import liste.ListaCategorie;
+import liste.ListaImmobili;
 import regole.Regola;
 import rilevazione.Attuatore;
 import rilevazione.Sensore;
@@ -119,16 +119,16 @@ public class GestioneFile {
 	 * @return the lista unita immobiliari
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ListaUnitaImmobiliari caricaImmobiliDaFile(String path) throws IOException
+	public static ListaImmobili caricaImmobiliDaFile(String path) throws IOException
 	{
-		ListaUnitaImmobiliari lista = new ListaUnitaImmobiliari();
+		ListaImmobili lista = new ListaImmobili();
 		try {
 			BufferedReader csvReader = new BufferedReader(new FileReader(path));
 			String row;
 			while ((row = csvReader.readLine()) != null) 
 			{
 			     String[] data = row.split(Costanti.DIVISORE);
-			     lista.addUnitaImmobiliare(new UnitaImmobiliare(data[0]));
+			     lista.addImmobile(new UnitaImmobiliare(data[0]));
 			 }
 			 csvReader.close();
 		}

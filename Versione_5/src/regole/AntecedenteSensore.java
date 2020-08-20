@@ -2,13 +2,14 @@ package regole;
 
 import java.io.Serializable;
 
+import categorie.Stato;
 import categorie.Valore;
 import costanti.Costanti;
 import operazioni.BoolFunct;
 import operazioni.BooleanOperator;
 import rilevazione.Sensore;
 
-public class AntecedenteSensore implements Antecedente, Serializable{
+public class AntecedenteSensore implements Antecedente, Serializable, StampaSensoreAntecedente,GetSensoreAntecedente, StatoOperandoA{
 	
 
 	private static final long serialVersionUID = 1L;
@@ -72,9 +73,9 @@ public class AntecedenteSensore implements Antecedente, Serializable{
 	 * @post: -
 	 * @return the operando a
 	 */
-	public Sensore getSensoreAntecedente() 
+	public String getSensoreAntecedente() 
 	{
-		return operando_a;
+		return operando_a.getNomeUnita();
 	}
 
 	/**
@@ -84,9 +85,9 @@ public class AntecedenteSensore implements Antecedente, Serializable{
 	 * @post: -
 	 * @return the operando b
 	 */
-	public Sensore getOperando_b() 
+	public String getOperando_b() 
 	{
-		return operando_b;
+		return operando_b.getNomeUnita();
 	}
 
 	/**
@@ -175,6 +176,15 @@ public class AntecedenteSensore implements Antecedente, Serializable{
 	}
 	
 	
+	public Stato getStatoSensoreA()
+	{
+		return operando_a.getStato();
+	}
+	
+	public Stato getStatoSensoreB()
+	{
+		return operando_a.getStato();
+	}
 	
 	
 	

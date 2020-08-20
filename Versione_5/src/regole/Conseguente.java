@@ -3,6 +3,7 @@ package regole;
 import java.io.Serializable;
 
 import categorie.ModalitaOperativa;
+import categorie.Stato;
 import costanti.Costanti;
 import rilevazione.Attuatore;
 import time.Orologio;
@@ -173,5 +174,13 @@ public class Conseguente implements Serializable{
 		return sb.toString();
 	}
 	
+	public Stato getStatoConseguente()
+	{
+		return attuatore.getStato();
+	}
 	
+	public String getNomeConseguente()
+	{
+		return attuatore.getNomeUnita();
+	}
 }

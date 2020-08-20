@@ -2,7 +2,7 @@ package costanti;
 
 public class Messaggi {
 
-	public static final String SCELTAUSCITA= "Vuoi uscire dal sistema? (Digitare esci per uscire)";
+	//Messaggi inserimento
 	public static final String MESSAGGIO_INSERIMENTO_UNITA_IMMOBILIARE ="Inserire il nome dell'unita immobiliare: ";
 	public static final String MESSAGGIO_INSERIMENTO_UNITA_DOMOTICA = "Inserisci nome unita domotica: ";
 	public static final String MESSAGGIO_INSERIMENTO_CATEGORIA = "Inserisci il nome della categoria: ";
@@ -40,6 +40,7 @@ public class Messaggi {
 	public static final String OPERANDI_DELLA_LISTA_NON_SUFFICIENTI = "Operandi della lista non sufficienti";
 	public static final String SCEGLI_UN_ATTUATORE = "Scegli un attuatore: ";
 	public static final String SCEGLI_UN_SENSORE = "Scegli un sensore: ";
+	public static final String SCELTAUSCITA= "Vuoi uscire dal sistema? (Digitare esci per uscire)";
 	public static final String REGOLA = "regola";
 	public static final String REGOLA_ABILITATA = "Regola Abilitata";
 	public static final String REGOLA_DISABILITATA = "Regola disabilitata";
@@ -58,6 +59,7 @@ public class Messaggi {
 	public static final String LISTA_CATEGORIE = " Lista Categorie";
 	public static final String ASSEGNARE_UN_ALTRA_INFORMAZIONE_RILEVABILE = "Vuoi assegnare un'altra informazione rilevabile? (si/no)";
 	public static final String INSERIRE_IL_NUMERO_DEL_DOMINIO = "Inserire il numero del dominio: ";
+	public static final String SCEGLI_VOCE = "Scegli voce: ";
 	
 	//Messaggi di Errore
 	public static final String MESSAGGIO_ELEMENTO_ESISTENTE = "L'elemento inserito e' gia presente.";

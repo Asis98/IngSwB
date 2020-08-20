@@ -3,15 +3,14 @@ package sistema_domotico;
 import ambiente.Artefatto;
 import ambiente.Stanza;
 import ambiente.UnitaImmobiliare;
-import categorie.ListaCategorie;
 import costanti.Costanti;
 import costanti.Messaggi;
+import liste.ListaCategorie;
 import regole.Regola;
 import regole.StatoRegola;
 
 public class Visualizzazione {
 
-	
 
 	/*-------------------------------------------------------------------------------------------------------------------------------------------------
 	 * METODO VISUALIZZAZIONE UNITA' IMMOBILIARI , STANZE E ARTEFATTI

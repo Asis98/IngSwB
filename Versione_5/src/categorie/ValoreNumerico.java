@@ -6,7 +6,7 @@ package categorie;
 import java.io.Serializable;
 
 import costanti.Costanti;
-import it.unibs.fp.mylib.NumeriCasuali;
+import utility.NumeriCasuali;
 
 public class ValoreNumerico implements Valore<Double> , Serializable{
 	
