@@ -1,6 +1,5 @@
 package utenti;
 
-import ambiente.UnitaImmobiliare;
 import costanti.Costanti;
 import costanti.Messaggi;
 import costanti.TitoliMenu;
