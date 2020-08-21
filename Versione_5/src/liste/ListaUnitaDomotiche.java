@@ -1,11 +1,12 @@
 package liste;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ambiente.UnitaDomotica;
 import ambiente.UnitaImmobiliare;
 
-public class ListaUnitaDomotiche {
+public class ListaUnitaDomotiche implements Iterable<UnitaDomotica>{
 
 	private ArrayList<UnitaDomotica> unitList;
 	
@@ -124,6 +125,12 @@ public class ListaUnitaDomotiche {
 	public boolean isEmpty()
 	{
 		return unitList.isEmpty();
+	}
+
+
+	@Override
+	public Iterator<UnitaDomotica> iterator() {
+		return unitList.iterator();
 	}
 
 

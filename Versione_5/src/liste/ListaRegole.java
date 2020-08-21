@@ -1,12 +1,13 @@
 package liste;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ambiente.UnitaImmobiliare;
 import regole.Regola;
 import regole.StatoRegola;
 
-public class ListaRegole {
+public class ListaRegole implements Iterable<Regola>{
 
 	private ArrayList<Regola> listaRegole;
 	
@@ -121,6 +122,12 @@ public class ListaRegole {
 		}
 		
 		return conto;
+	}
+
+
+	@Override
+	public Iterator<Regola> iterator() {
+		return listaRegole.iterator();
 	}
 	
 	

@@ -1,16 +1,15 @@
 package sistema_domotico;
 
 import ambiente.Artefatto;
-import ambiente.Stanza;
-import ambiente.UnitaImmobiliare;
-import costanti.Costanti;
-import costanti.Messaggi;
+import ambiente.Immobile;
+import regole.Regola;
+import regole.StatoRegola;
 
 public class ModelVisualizzazione {
 	
-	public boolean visualizzazioneUnitaImmobiliari(UnitaImmobiliare immobile, int i)
+	public boolean visualizzazioneUnitaImmobiliari(Immobile immobile, int i)
 	{
-		if(immobile.getUnitaDomotica(i) instanceof Artefatto && ((Artefatto)immobile.getUnitaDomotica(i)).getStanza() != null )
+		if(immobile.getUnitList().getUnitaDomotica(i) instanceof Artefatto && ((Artefatto)immobile.getUnitList().getUnitaDomotica(i)).getStanza() != null )
 		{
 			return true;
 		}
@@ -18,27 +17,45 @@ public class ModelVisualizzazione {
 	
 	}
 	
-	public boolean sizeValoriSensori(UnitaImmobiliare immobile)
+	public boolean sizeValoriSensori(Immobile immobile)
 	{
-		if(immobile.sizeSensori()!=0)
+		if(immobile.getListaSensori().size()!=0)
 		{
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean isEmptyAttuatori(UnitaImmobiliare immobile)
+	public boolean isEmptyAttuatori(Immobile immobile)
 	{
-		if(!immobile.isEmptyAttuatori())
+		if(!immobile.getListaAttuatori().isEmpty())
 		{
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean isEmptySensori(UnitaImmobiliare immobile)
+	public boolean isEmptySensori(Immobile immobile)
 	{
-		if(!immobile.isEmptySensori())
+		if(!immobile.getListaAttuatori().isEmpty())
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean controllaRegolaAttiva(Regola elemento)
+	{
+		if(elemento.getStato() == StatoRegola.ABILITATA)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean controllaRegolaDisattiva(Regola elemento)
+	{
+		if(elemento.getStato() == StatoRegola.DISABILITATA)
 		{
 			return true;
 		}

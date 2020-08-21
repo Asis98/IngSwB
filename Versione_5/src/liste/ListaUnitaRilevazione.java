@@ -1,12 +1,13 @@
 package liste;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ambiente.UnitaImmobiliare;
 import categorie.Stato;
 import rilevazione.UnitaRilevazione;
 
-public class ListaUnitaRilevazione {
+public class ListaUnitaRilevazione implements Iterable<UnitaRilevazione>{
 	
 	private ArrayList<UnitaRilevazione> listaUnitaRilevazione;
 	
@@ -257,6 +258,11 @@ public class ListaUnitaRilevazione {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Iterator<UnitaRilevazione> iterator() {
+		return listaUnitaRilevazione.iterator();
 	}
 
 	

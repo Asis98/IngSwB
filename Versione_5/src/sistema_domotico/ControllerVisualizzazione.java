@@ -1,15 +1,18 @@
 package sistema_domotico;
 
 import ambiente.Artefatto;
+import ambiente.Immobile;
 import ambiente.Stanza;
-import ambiente.UnitaImmobiliare;
 import costanti.Costanti;
 import costanti.Messaggi;
 import liste.ListaCategorie;
+import regole.Regola;
+import rilevazione.Attuatore;
+import rilevazione.Sensore;
 
 public class ControllerVisualizzazione {
 	
-	private UIvisualizzazione view = new UIvisualizzazione();
+	private UserInterface view = new UserInterface();
 	private ModelVisualizzazione model = new ModelVisualizzazione();
 	
 
@@ -17,23 +20,29 @@ public class ControllerVisualizzazione {
 	 * METODO VISUALIZZAZIONE UNITA' IMMOBILIARI , STANZE E ARTEFATTI
 	 * ------------------------------------------------------------------------------------------------------------------------------------------------
 	 */	
-	public void visualizzaUnitaImmobiliari(UnitaImmobiliare immobile)
+	public void visualizzaUnitaImmobiliari(Immobile immobile)
 	{
-		view.stampaMessaggio(Messaggi.UNITA_IMMOBILIARE + immobile.getdestinazione());
+		view.stampaMessaggio(Messaggi.UNITA_IMMOBILIARE + immobile.getDestinazioneUnita());
 		view.stampaMessaggio(Messaggi.LISTA_UNITA_DOMOTICHE);
 		
-		for(int i=0;i<immobile.size();i++)
+		for(int i=0;i<immobile.getUnitList().size();i++)
 		{
 			if(model.visualizzazioneUnitaImmobiliari(immobile, i))
 			{
-				view.stampaMessaggio(immobile.getUnitaDomotica(i).getUnitName() + Costanti.TRATTINO + 
-						(immobile.getUnitaDomotica(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO)+
-						Messaggi.FA_PARTE_DI +((Artefatto)immobile.getUnitaDomotica(i)).getStanza());
+				view.stampaMessaggio(immobile.getUnitList().getUnitaDomotica(i).getUnitName() + Costanti.TRATTINO + 
+						(immobile.getUnitList().getUnitaDomotica(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO)+
+						Messaggi.FA_PARTE_DI +((Artefatto)immobile.getUnitList().getUnitaDomotica(i)).getStanza());
 			}
 			else
-			view.stampaMessaggio(immobile.getUnitaDomotica(i).getUnitName() + Costanti.TRATTINO + (immobile.getUnitaDomotica(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO));
+			view.stampaMessaggio(immobile.getUnitList().getUnitaDomotica(i).getUnitName() + Costanti.TRATTINO + (immobile.getUnitList().getUnitaDomotica(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO));
 		}
 	}
+	
+	
+	/*-------------------------------------------------------------------------------------------------------------------------------------------------
+	 * METODO VISUALIZZAZIONE CATEGORIE SENSORI E ATTUATORI CON LE RISPETTIVE UNITA' DI RILEVAZIONE
+	 * ------------------------------------------------------------------------------------------------------------------------------------------------
+	 */	
 	
 	public void visualizzaCategorie(ListaCategorie listaCategorieAttuatori, ListaCategorie listaCategorieSensori)
 	{
@@ -42,7 +51,6 @@ public class ControllerVisualizzazione {
 		//stampo attuatori
 		view.stampaMessaggio(Messaggi.ELENCO_CATEGORIE_ATTUATORI);
 		view.stampaMessaggio(listaCategorieAttuatori.stampaListaString());
-		
 		view.stampaMessaggio("");
 		
 		//stampo sensori
@@ -51,49 +59,103 @@ public class ControllerVisualizzazione {
 		
 	}
 
-	public void visualizzaValoriSensori(UnitaImmobiliare immobile)
+	/*-------------------------------------------------------------------------------------------------------------------------------------------------
+	 * METODO VISUALIZZAZIONE VALORI RILEVATI SENSORI
+	 * ------------------------------------------------------------------------------------------------------------------------------------------------
+	 */	
+	
+	public void visualizzaValoriSensori(Immobile immobile)
 	{
 		if(model.sizeValoriSensori(immobile))
 		{
 			view.stampaMessaggio(Costanti.ELENCO_SENSORI);
-		    for(int i=0;i<immobile.sizeSensori();i++)
+		    for(int i=0;i<immobile.getListaSensori().size();i++)
 		    {
-		    	view.stampaMessaggio(immobile.getSensore(i).getNomeUnita() + ": ");
-		    	view.stampaMessaggio(immobile.getSensore(i).printListaMisurazioni());
+		    	view.stampaMessaggio(immobile.getListaSensori().getElemento(i).getNomeUnita() + ": ");
+		    	view.stampaMessaggio(((Sensore)immobile.getListaSensori().getElemento(i)).printListaMisurazioni());
 		    }	
 		}else view.stampaMessaggio(Messaggi.AVVISO_LISTA_SENSORI_VUOTA);
 	}
 	
-	public void visualizzaListaUnitaRilevazione(UnitaImmobiliare immobile)
+	/*-------------------------------------------------------------------------------------------------------------------------------------------------
+	 * METODO VISUALIZZAZIONE LISTA SENSORI/ ATTUATORI
+	 * ------------------------------------------------------------------------------------------------------------------------------------------------
+	 */	
+	
+	public void visualizzaListaUnitaRilevazione(Immobile immobile)
 	{
 		view.stampaMessaggio(Costanti.ELENCO_ATTUATORI);
 		if(!model.isEmptyAttuatori(immobile))
-			view.stampaMessaggio(immobile.stampaListaAttuatori());
+			view.stampaMessaggio(immobile.getListaAttuatori().stampaListaUnitaRilevazione());
 		view.stampaMessaggio(Costanti.ELENCO_SENSORI);
 		if(!model.isEmptySensori(immobile))
-			view.stampaMessaggio(immobile.stampaListaSensori());
+			view.stampaMessaggio(immobile.getListaSensori().stampaListaUnitaRilevazione());
 	}
 	
-	public void visualizzaAttuatoriModOp(UnitaImmobiliare immobile)
+	/*-------------------------------------------------------------------------------------------------------------------------------------------------
+	 * METODO VISUALIZZAZIONE ATTUATORI + MODALITA' OPERATIVA
+	 * ------------------------------------------------------------------------------------------------------------------------------------------------
+	 */	
+	
+	public void visualizzaAttuatoriModOp(Immobile immobile)
 	{
 		view.stampaMessaggio("Lista Attuatori");
 		//raggruppo gli attuatori per stanza
-		for(int i =0; i<immobile.size();i++)
+		for(int i =0; i<immobile.getUnitList().size();i++)
 		{
-			view.stampaMessaggio(immobile.getUnitaDomotica(i).getUnitName().toUpperCase());
+			view.stampaMessaggio(immobile.getUnitList().getUnitaDomotica(i).getUnitName().toUpperCase());
 			
-			for(int c=0; c<immobile.sizeAttuatori();c++)
+			for(int c=0; c<immobile.getListaAttuatori().size();c++)
 			{
-				if(immobile.getAttuatore(c).getUnitaDomotica().getUnitName().equalsIgnoreCase(immobile.getUnitaDomotica(i).getUnitName()))
+				if(immobile.getListaAttuatori().getElemento(c).getUnitaDomotica().getUnitName().equalsIgnoreCase(immobile.getUnitList().getUnitaDomotica(i).getUnitName()))
 				{
-					view.stampaMessaggio("\t"+immobile.getAttuatore(c).getNomeUnita());
+					view.stampaMessaggio("\t"+immobile.getListaAttuatori().getElemento(c).getNomeUnita());
 					view.stampaMessaggio("\t"+"\t"+Costanti.MODALITA_OPERATIVE);
-					view.stampaMessaggio("\t"+"\t"+"\t"+immobile.getAttuatore(c).getModOperativa().printModNameParamValue());
+					view.stampaMessaggio("\t"+"\t"+"\t"+((Attuatore)immobile.getListaAttuatori().getElemento(c)).getModOperativa().printModNameParamValue());
 				}
 			}
 			
 			view.stampaMessaggio("\n");
 		}
 	}
+	
+	/*-------------------------------------------------------------------------------------------------------------------------------------------------
+	 * METODO VISUALIZZAZIONE REGOLE ATTIVE
+	 * ------------------------------------------------------------------------------------------------------------------------------------------------
+	 */	
+	public void visualizzaRegoleAttive(Immobile immobile)
+	{	
+		int i=0;
+		for(Regola elemento: immobile.getListaRegole())
+		{
+			if(model.controllaRegolaAttiva(elemento))
+			{
+				view.stampaMessaggio(i+Costanti.TRATTINO + elemento.stampaRegola());
+				view.stampaMessaggio(Costanti.RISULTATO + elemento.valutaRegola());
+				i++;
+			}
+		}
+	}
+	
+	
+	/*-------------------------------------------------------------------------------------------------------------------------------------------------
+	 * METODO VISUALIZZAZIONE REGOLE Disattive
+	 * ------------------------------------------------------------------------------------------------------------------------------------------------
+	 */	
+	
+	public void visualizzaRegoleDisattive(Immobile immobile)
+	{
+		int i=0;
+		for(Regola elemento: immobile.getListaRegole())
+		{
+			if(model.controllaRegolaDisattiva(elemento))
+			{
+				view.stampaMessaggio(i+Costanti.TRATTINO+elemento.stampaRegola());
+				view.stampaMessaggio(Costanti.RISULTATO+ elemento.valutaRegola());
+				i++;
+			}
+		}
+	}
+	
 
 }
