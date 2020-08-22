@@ -90,6 +90,10 @@ public class Sensore extends UnitaRilevazione{
 		return (CategoriaSensori)super.getCategoria();
 	}
 	
+	public String getNomeCategoria()
+	{
+		return super.getNomeCategoria();
+	}
 	/**
 	 * Sets the unita domotica.
 	 *
@@ -114,6 +118,10 @@ public class Sensore extends UnitaRilevazione{
 		return super.getUnitaDomotica();
 	}
 	
+	public String getNomeUnitaDomotica()
+	{
+		return super.getNomeUnitaDomotica();
+	}
 	/**
 	 * Gets the stato.
 	 *

@@ -95,6 +95,10 @@ public abstract class UnitaRilevazione implements Serializable{
 		return categoria;
 	}
 	
+	public String getNomeCategoria()
+	{
+		return categoria.getNomeCategoria();
+	}
 	/**
 	 * Sets the unita domotica.
 	 *
@@ -117,6 +121,11 @@ public abstract class UnitaRilevazione implements Serializable{
 	public UnitaDomotica getUnitaDomotica()
 	{
 		return unitaDomotica;
+	}
+	
+	public String getNomeUnitaDomotica()
+	{
+		return unitaDomotica.getUnitName();
 	}
 	
 	/**

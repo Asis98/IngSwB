@@ -21,6 +21,11 @@ public class UserInterface {
 	{
 		System.out.println(messaggio);
 	}
+	
+	public int inputInteriConMinimo(String messaggio, int minimo, int massimo)
+	{
+		return input.leggiIntero(messaggio, minimo, massimo);
+	}
 }
 
 

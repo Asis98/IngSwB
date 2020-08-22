@@ -10,8 +10,9 @@ public class Immobile {
 	private ListaUnitaRilevazione listaSensori;
 	private ListaRegole listaRegole;
 	
-	public Immobile()
+	public Immobile(UnitaImmobiliare unita)
 	{
+		this.unita = unita;
 		this.unitList= new ListaUnitaDomotiche();
 		this.listaAttuatori= new ListaUnitaRilevazione();
 		this.listaSensori= new ListaUnitaRilevazione();

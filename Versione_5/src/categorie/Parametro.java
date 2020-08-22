@@ -39,6 +39,11 @@ public class Parametro implements Serializable{
 		this.nomeParametro = Costanti.STRINGA_VUOTA;
 	}
 	
+	public Parametro(String nomeParametro) {
+		
+		this.nomeParametro = nomeParametro;
+	}
+
 	/**
 	 * Sets the nome parametro.
 	 *

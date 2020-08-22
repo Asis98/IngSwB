@@ -1,12 +1,18 @@
 package sistema_domotico;
 
+import ambiente.Immobile;
+import ambiente.UnitaDomotica;
 import ambiente.UnitaImmobiliare;
 import categorie.Categoria;
 import categorie.CategoriaAttuatori;
 import categorie.CategoriaSensori;
+import categorie.InfoRilevabile;
+import categorie.ModalitaOperativa;
+import categorie.Parametro;
 import costanti.Costanti;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
+import rilevazione.UnitaRilevazione;
 
 public class Modelinserimento {
 
@@ -17,58 +23,76 @@ public class Modelinserimento {
 	
 	/**
 	 * Inserisci unita immobiliare.
-	 * 
-	 * @param: listaImmobili
-	 * @pre: listaImmobili!=null
-	 * @post: if(!listaImmobili.unitaImmobiliareGiaPresente(destinazione)) listaImmobili.size() = listaImmobili.size()@pre +1 
-	 * @post: @forall k : [0..size()-2]
-	 * (k < (listaImmobili.size()-1)) ==> element(k)@pre == element(k)) 
-	 * @return listaImmobili
 	 */
 	public boolean inserimentoUnitaImmobiliare(String destinazione, ListaImmobili listaImmobili)
 	{
 		if(!listaImmobili.unitaImmobiliareGiaPresente(destinazione))
 		{
-			UnitaImmobiliare immobile = new UnitaImmobiliare(destinazione);
+			UnitaImmobiliare unitaImmobiliare = new UnitaImmobiliare(destinazione);
 			//immobile.setdestinazione(destinazione);
-			listaImmobili.addImmobile(immobile);
+			listaImmobili.addImmobile(new Immobile(unitaImmobiliare));
 			return true;
 		}
 		else
 			return false;
 	}
 	
-	public boolean inserimentoCategoria(String nome, String descrizione, Categoria categoria, ListaCategorie listaCategorie)
+	public boolean inserimentoCategoria(String nome, String descrizione, ListaCategorie listaCategorie, Categoria categoria)
 	{
 		if(!listaCategorie.categoriaGiaPresente(nome) && descrizione.length()<Costanti.MAXCHAR)
 		{
 			categoria.setNomeCategoria(nome);
 			categoria.setDescrizioneCategoria(descrizione);
-			
-			//INSERIMENTO CATEGORIA ATTUATORI
-			if(categoria instanceof CategoriaAttuatori)
-			{
-					//metodo che prima chiede l'inserimento delle infoRilevabili e poi aggiunge l'oggetto categoria all'arrayLis
-					//DA CAMBIARE
-					listaCategorie.addCategoria(HelpMethod.inserisciModalitaOperative((CategoriaAttuatori)categoria));		
-			}
-			//INSERIMENTO CATEGORIA SENSORI
-			else if (categoria instanceof CategoriaSensori)
-			{ 
-				//DA CAMBIARE
-				String scelta = InputDati.leggiStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_DOMINIO);
-				if(scelta.equalsIgnoreCase(Costanti.SI))
-				{
-					categoria=HelpMethod.inserisciDominio((CategoriaSensori) categoria);
-				}
-					//metodo che prima chiede l'inserimento delle infoRilevabili e poi aggiunge l'oggetto categoria all'arrayList
-					listaCategorie.addCategoria(HelpMethod.inserisciInfoRilevabili((CategoriaSensori)categoria));
-			}
+			return true;
 		}
 		return false;
 	}
 	
+	public boolean verificaModOp(ModalitaOperativa modOp, CategoriaAttuatori categoria)
+	{
+		return categoria.modalitaGiaPresente(modOp.getNomeModOperativa());
+	}
 	
+	public boolean verificaParametro(ModalitaOperativa modOp, String nome)
+	{
+		if(modOp.parametroGiaPresente(nome))
+		{
+			return true;
+		}
+		return false;
+	}
 	
+	public Parametro ParametroCreator(String nomeParametro)
+	{
+		return new Parametro(nomeParametro);
+	}
+	
+	public boolean verificaDominio(CategoriaSensori categoria, String elemento)
+	{
+		return categoria.dominioGiaPresente(elemento.trim());
+	}
+	
+	public boolean verificaInfoRilevabile(CategoriaSensori categoria, InfoRilevabile infoRil)
+	{
+		return categoria.infoGiaPresente(infoRil.getTipoInfoRilevabile());
+	}
+	
+	public InfoRilevabile setStatoInfoRilevabile(InfoRilevabile infoRil, String tipo)
+	{
+		if(tipo.equalsIgnoreCase(Costanti.NUMERICA))
+			infoRil.setNonnumerica(false);
+		else if (tipo.equalsIgnoreCase(Costanti.NONNUMERICA))
+			infoRil.setNonnumerica(true);
+		return infoRil;
+	}
+	
+	public UnitaRilevazione settingUnitaRilevazione(UnitaDomotica unitaDomotica, Categoria categoria, String nomeUnita, UnitaRilevazione unita, int numero)
+	{
+		unita.setUnitaDomotica(unitaDomotica);
+		unita.setCategoria(categoria);
+		unita.setNomeUnita(nomeUnita
+				+ numero+Costanti.TRATTINO_BASSO+categoria.getNomeCategoria());
+		return unita;
+	}
 	
 }

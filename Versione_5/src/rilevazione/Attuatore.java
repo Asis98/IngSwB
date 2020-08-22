@@ -114,6 +114,11 @@ public class Attuatore extends UnitaRilevazione{
 		return (CategoriaAttuatori)super.getCategoria();
 	}
 	
+	public String getNomeCategoria()
+	{
+		return super.getNomeCategoria();
+	}
+	
 	/**
 	 * Sets the unita domotica.
 	 *
@@ -138,6 +143,10 @@ public class Attuatore extends UnitaRilevazione{
 		return super.getUnitaDomotica();
 	}
 	
+	public String getNomeUnitaDomotica()
+	{
+		return super.getNomeUnitaDomotica();
+	}
 	/**
 	 * Gets the stato.
 	 *

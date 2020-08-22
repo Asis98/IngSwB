@@ -265,6 +265,15 @@ public class ListaUnitaRilevazione implements Iterable<UnitaRilevazione>{
 		return listaUnitaRilevazione.iterator();
 	}
 
+	public String nomeCategoria(int i)
+	{
+		return this.getElemento(i).getNomeCategoria();
+	}
+	
+	public String nomeUnitaDomotica(int i)
+	{
+		return this.getElemento(i).ge;
+	}
 	
 	
 
