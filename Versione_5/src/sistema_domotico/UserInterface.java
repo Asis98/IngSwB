@@ -26,6 +26,16 @@ public class UserInterface {
 	{
 		return input.leggiIntero(messaggio, minimo, massimo);
 	}
+	
+	public double inputDouble(String messaggio)
+	{
+		return input.leggiDouble(messaggio);
+	}
+	
+	public int inputLeggiIntero(String messaggio)
+	{
+		return input.leggiIntero(messaggio);
+	}
 }
 
 

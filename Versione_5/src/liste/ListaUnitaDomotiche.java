@@ -133,7 +133,10 @@ public class ListaUnitaDomotiche implements Iterable<UnitaDomotica>{
 		return unitList.iterator();
 	}
 
-
+	public String getNomeUnitaDomotica(int i)
+	{
+		return unitList.get(i).getUnitName();
+	}
 	
 	
 }

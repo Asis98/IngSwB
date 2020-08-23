@@ -275,6 +275,11 @@ public class ListaUnitaRilevazione implements Iterable<UnitaRilevazione>{
 		return this.getElemento(i).getNomeUnitaDomotica();
 	}
 	
+	public void add(UnitaRilevazione unita)
+	{
+		listaUnitaRilevazione.add(unita);
+	}
+	
 	
 
 }

@@ -1,9 +1,3 @@
-/ambiente/
-/categorie/
-/costanti/
-/gestioneMenu/
-/inputUtente/
-/liste/
 /operazioni/
 /regole/
 /rilevazione/
@@ -11,3 +5,8 @@
 /time/
 /utenti/
 /utility/
+/categorie/
+/liste/
+/gestioneMenu/
+/ambiente/
+/costanti/

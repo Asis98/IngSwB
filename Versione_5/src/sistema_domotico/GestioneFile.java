@@ -1,6 +1,7 @@
 package sistema_domotico;
 
 import java.io.BufferedReader;
+import utility.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,6 +17,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import ambiente.Immobile;
 import ambiente.UnitaImmobiliare;
 import categorie.CategoriaAttuatori;
 import categorie.CategoriaSensori;
@@ -24,9 +26,9 @@ import categorie.ValoreNonNumerico;
 import categorie.ValoreNumerico;
 import costanti.Costanti;
 import costanti.Messaggi;
-import it.unibs.fp.mylib.ServizioFile;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
+import liste.ListaRegole;
 import regole.Regola;
 import rilevazione.Attuatore;
 import rilevazione.Sensore;
@@ -128,7 +130,7 @@ public class GestioneFile {
 			while ((row = csvReader.readLine()) != null) 
 			{
 			     String[] data = row.split(Costanti.DIVISORE);
-			     lista.addImmobile(new UnitaImmobiliare(data[0]));
+			     lista.addImmobile(new Immobile(new UnitaImmobiliare(data[0])));
 			 }
 			 csvReader.close();
 		}
@@ -151,7 +153,7 @@ public class GestioneFile {
 	 * @post: immobile.listaRegole != null
 	 * @return the unita immobiliare
 	 */
-	public static UnitaImmobiliare caricaRegoleDaFile(UnitaImmobiliare immobile, String path)
+	public static Immobile caricaRegoleDaFile(Immobile immobile, String path)
 	{
 		
 		try {
@@ -177,7 +179,7 @@ public class GestioneFile {
 					Element currentAnt = (Element)listaAntecedenti.item(i);
 					
 					Sensore sensore = null;
-					if((sensore = immobile.cercaSensore(getText(currentAnt.getElementsByTagName(Costanti.FIRSTSENSORE)))) != null)
+					if((sensore = (Sensore) immobile.getListaSensori().cercaUnitaRilevazione(getText(currentAnt.getElementsByTagName(Costanti.FIRSTSENSORE)))) != null)
 			    	 {
 				    	sensore.addMisurazione(sensore.cercaInfoRilevabile(getText(currentAnt.getElementsByTagName(Costanti.FIRSTINFORIL))));
 				    	
@@ -192,7 +194,7 @@ public class GestioneFile {
 					    	
 				    	} else if(currentAnt.getElementsByTagName(Costanti.SECONDSENSORE).getLength() != 0)
 				    	{
-				    		Sensore sensoreB = immobile.cercaSensore(getText(currentAnt.getElementsByTagName(Costanti.SECONDSENSORE)));
+				    		Sensore sensoreB = (Sensore) immobile.getListaSensori().cercaUnitaRilevazione(getText(currentAnt.getElementsByTagName(Costanti.SECONDSENSORE)));
 				    		regola.setAntecedente(sensore, getText(currentAnt.getElementsByTagName(Costanti.OPREL)), sensoreB);
 				    	}	
 				    }		
@@ -205,7 +207,7 @@ public class GestioneFile {
 					Element currentCons = (Element)listaConseguenti.item(j); 
 					
 					Attuatore attuatore = null;
-					if((attuatore = immobile.cercaAttuatore(getText(currentCons.getElementsByTagName(Costanti.ATTUATOREXML)))) != null && !regola.isEmptyAntecedente())
+					if((attuatore = (Attuatore) immobile.getListaAttuatori().cercaUnitaRilevazione(getText(currentCons.getElementsByTagName(Costanti.ATTUATOREXML)))) != null && !regola.isEmptyAntecedente())
 			    	 {
 							String modOp = getText(currentCons.getElementsByTagName(Costanti.MODALOP));
 							ModalitaOperativa modOperativa = attuatore.getCategoria().cercaModOp(modOp);
@@ -213,8 +215,9 @@ public class GestioneFile {
 			    	 }				
 				}
 				
-				immobile.setRegola(regola);
-				
+				ListaRegole lista = immobile.getListaRegole();
+				lista.setRegola(regola);
+				immobile.setListaRegole(lista);
 			}
 	    } catch (Exception e) {
 		e.printStackTrace();

@@ -34,6 +34,10 @@ public class Case {
 	public static final int VISUALIZZA_CATEGORIE_SENSORI_ATTUATORI = 3;
 	public static final int INSERISCI_STANZA = 1;
 	public static final int INSERISCI_ARTEFATTO = 2;
-
+	public static final int REGOLE_CON_DUE_SENSORI = 1;
+	public static final int REGOLE_SENSORE_COSTANTE = 2;
+	public static final int REGOLE_SENSORE_TIME = 3;
+	
+	
 	
 }
