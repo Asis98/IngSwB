@@ -11,6 +11,8 @@ import categorie.CategoriaAttuatori;
 import categorie.CategoriaSensori;
 import categorie.InfoRilevabile;
 import categorie.ModalitaOperativa;
+import categorie.ValoreNonNumerico;
+import categorie.ValoreNumerico;
 import costanti.Costanti;
 import costanti.Messaggi;
 import costanti.TitoliMenu;
@@ -22,13 +24,18 @@ import gestioneMenu.MenuCommand;
 import inputUtente.DatiUtente;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
+import liste.ListaRegole;
 import liste.ListaUnitaDomotiche;
 import liste.ListaUnitaRilevazione;
 import operazioni.BooleanOperator;
+import regole.AntecedenteSensore;
 import regole.Regola;
+import regole.StatoRegola;
 import rilevazione.Attuatore;
 import rilevazione.Sensore;
 import rilevazione.UnitaRilevazione;
+import time.Orologio;
+import time.Time;
 import utility.MyMenu;
 
 public class ControlInserimento {
@@ -509,19 +516,68 @@ public class ControlInserimento {
 			//DA FARE ANCORA
 			if(!regola.isEmptyAntecedente())
 			{
-				HelpMethod.inserisciConseguente(immobile, regola);
-				if(regola.valutaRegola())
-					regola.setStato(StatoRegola.ABILITATA);
-				else
-					regola.setStato(StatoRegola.DISABILITATA);
+				regola = inserisciConseguente(immobile, regola);
+				regola = model.valutaRegola(regola);
 				
-				immobile.setRegola(regola);
+				ListaRegole listaR= immobile.getListaRegole();
+				listaR.setRegola(regola);
+				immobile.setListaRegole(listaR);
+				
 			}
 
 		}
 	}
 	
-	public Regole inserisciRegolaSensori(Regola regola, Immobile immobile)
+	public Regola inserisciConseguente(Immobile immobile, Regola regola)
+	{
+		do {	
+				//scelgo l'attuatore
+				ListaUnitaRilevazione listaAttuatori = immobile.getListaAttuatori();
+				System.out.println(listaAttuatori.stampaListaUnitaAttive());
+				int	numeroAttuatore = view.inputInteriConMinimo(Messaggi.SCEGLI_UN_ATTUATORE, Costanti.MIN, listaAttuatori.size()-1);
+				
+				
+				
+				//stampo l'attuale mod operativa dell'attuatore scelto
+				view.stampaMessaggio(Messaggi.MODALITA_OPERATIVA_ATTUALE + ((Attuatore) listaAttuatori.getElemento(numeroAttuatore)).getModOperativa().getNomeModOperativa());
+				if(!((Attuatore) listaAttuatori.getElemento(numeroAttuatore)).getModOperativa().parametriIsEmpty())
+					view.stampaMessaggio(((Attuatore) listaAttuatori.getElemento(numeroAttuatore)).getModOperativa().printModNameParamValue());
+				
+				//scelgo nuova modalità operativa e se è parametrica imposto i parametri
+				view.stampaMessaggio(((Attuatore) listaAttuatori.getElemento(numeroAttuatore)).getCategoria().stampaModalitaOperative());
+				int numeroModalitaOperativa = view.inputInteriConMinimo(Messaggi.SCEGLI_UNA_NUOVA_MODALITA_OPERATIVA, Costanti.MIN, ((Attuatore) listaAttuatori.getElemento(numeroAttuatore)).getCategoria().size()-1);
+				
+				ModalitaOperativa modOp= ((CategoriaAttuatori) listaAttuatori.getElemento(numeroAttuatore).getCategoria()).getModalitaOperative(numeroModalitaOperativa);
+				if(!modOp.parametriIsEmpty())
+				{
+					for(int i =0;i<modOp.size(); i++)
+					{
+						view.stampaMessaggio(modOp.getParametro(i).getNomeParametro());
+						Double valore = view.inputDouble(Messaggi.INSERIRE_IL_NUOVO_VALORE_DEL_PARAMETRO);
+						modOp = model.setValoreParametro(modOp, numeroModalitaOperativa, valore);
+					}
+				}
+				
+				Attuatore attuatore = model.setAttuatore((Attuatore) listaAttuatori.getElemento(numeroAttuatore), modOp);
+				
+				//setto il conseguente
+				if(!regola.cercaAttuatore(attuatore))
+				{	
+					//se l'utente vuole assegno a start un'orario
+					if(view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_ORARIO_INIZIO).equalsIgnoreCase(Costanti.SI))
+						regola.setConseguente(attuatore, modOp, scegliOra());
+					else
+						regola.setConseguente(attuatore, modOp); 
+				}
+				else
+					System.out.println(Messaggi.GIA_PRESENTE);
+				
+		}while(view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_ALTRO_CONSEGUENTE).equalsIgnoreCase(Costanti.SI));
+
+		return regola;		
+	}
+	
+	public Regola inserisciRegolaSensori(Regola regola, Immobile immobile)
 	{
 		Sensore operando_a = new Sensore();
 		operando_a = scegliSensore(immobile);
@@ -531,19 +587,19 @@ public class ControlInserimento {
 			operatoreRelazionale = Costanti.UGUALE;
 		}
 		else
-			operatoreRelazionale = HelpMethod.scegliOperatore();
+			operatoreRelazionale = scegliOperatore();
 			
 		Sensore operando_b= new Sensore();
-		operando_b=HelpMethod.scegliSensore(immobile);
+		operando_b=scegliSensore(immobile);
 		
 		if(operando_a.getInfoRilevabile(0).getValoreAttuale().getValore().getClass() == String.class && 
 				operando_b.getInfoRilevabile(0).getValoreAttuale().getValore().getClass() != String.class)
 		{
-			System.out.println(Costanti.OPERANDI_INVALIDI);
+			view.stampaMessaggio(Costanti.OPERANDI_INVALIDI);
 		}
 		else if(new AntecedenteSensore(operando_a,operatoreRelazionale,operando_b).confrontaElementiAntecedente())
 		{
-			System.out.println(Costanti.INSERIMENTO_NON_VALIDO);
+			view.stampaMessaggio(Messaggi.INSERIMENTO_NON_VALIDO);
 		}
 		else
 			regola.setAntecedente(operando_a,operatoreRelazionale,operando_b);
@@ -551,23 +607,64 @@ public class ControlInserimento {
 		return regola;
 	}
 	
-	public Sensore scegliSensore(Immobile immobile)
+	public Regola inserisciRegolaCostante(Regola regola, Immobile immobile)
 	{
-		System.out.println(immobile.stampaListaSensoriAttivi());
+		//caso in cui operandoB = Costante
+		Sensore operando_a = new Sensore();
+		operando_a = scegliSensore(immobile);
 		
-		//setto il primo operando della regola
-		int	numeroSensore = InputDati.leggiIntero(Costanti.MESSAGGIO_SCELTA_OPERANDO, Costanti.MIN, immobile.sizeSensori()-1);
-		Sensore operando = new Sensore(immobile.getSensore(numeroSensore).getNomeUnita()); 
-		operando.setCategoria(immobile.getSensore(numeroSensore).getCategoria());
-		//stampo le infoRilevabili del sensore
-		System.out.println(immobile.getSensore(numeroSensore).printListaMisurazioni());
-		int	numeroInfoRil = InputDati.leggiIntero(Costanti.MESSAGGIO_INSERIMENTO_INFORIL_OPERANDO, Costanti.MIN, immobile.getSensore(numeroSensore).size()-1);
-		//assegno infoRilevabile scelta
-		operando.addMisurazione(immobile.getSensore(numeroSensore).getInfoRilevabile(numeroInfoRil));
+		if(operando_a.getInfoRilevabile(Costanti.MIN).getValoreAttuale().getValore().getClass() == String.class)
+			regola.setAntecedente(operando_a, Costanti.UGUALE, scegliCostanteStringa(operando_a));
+		else
+			regola.setAntecedente(operando_a, scegliOperatore(),scegliCostante());
 		
-		return operando;
+		return regola;
 	}
 	
+	public Regola inserisciRegolaTime(Regola regola, Immobile immobile)
+	{
+		view.stampaMessaggio(Messaggi.VALORE_DEL_PRIMO_ORARIO + new Orologio().toString());
+		regola.setAntecedente(scegliOperatore(), scegliOra());
+		return regola;
+	}
+	
+	public Sensore scegliSensore(Immobile immobile)
+	{
+		ListaUnitaRilevazione listaSensori = immobile.getListaSensori();
+		view.stampaMessaggio(listaSensori.stampaListaUnitaAttive());
+		
+		//setto il primo operando della regola
+		int	numeroSensore = view.inputInteriConMinimo(Messaggi.MESSAGGIO_SCELTA_OPERANDO, Costanti.MIN, listaSensori.size()-1);
+		
+		
+		//stampo le infoRilevabili del sensore
+		view.stampaMessaggio(((Sensore) listaSensori.getElemento(numeroSensore)).printListaMisurazioni());
+		int	numeroInfoRil = view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_INFORIL_OPERANDO, Costanti.MIN, ((Sensore) listaSensori.getElemento(numeroSensore)).size()-1);
+		//assegno infoRilevabile scelta
+		
+		
+		
+		return model.setOperandoSensore(listaSensori, numeroSensore, numeroInfoRil);
+	}
+	
+	public ValoreNonNumerico scegliCostanteStringa(Sensore operando_a)
+	{	
+		for(int i=0;i<operando_a.getCategoria().sizeDominio();i++)
+			view.stampaMessaggio(i+operando_a.getCategoria().getDominio(i));
+		int sceltaDominio= view.inputInteriConMinimo(Messaggi.INSERIRE_IL_NUMERO_DEL_DOMINIO, Costanti.MIN, operando_a.getCategoria().sizeDominio());
+		return new ValoreNonNumerico(operando_a.getCategoria().getDominio(sceltaDominio));
+	}
+	
+	public ValoreNumerico scegliCostante()
+	{
+		return new ValoreNumerico(view.inputDouble(Messaggi.MESSAGGIO_INSERIMENTO_COSTANTE));
+	}
+	
+	public Time scegliOra()
+	{
+		return new Time(view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_ORA, Costanti.MIN, 23),
+				view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_MINUTI, Costanti.MIN, 59));
+	}
 	public String scegliOperatore()
 	{
 		//assegnare ad una stringa la chiave della mappa

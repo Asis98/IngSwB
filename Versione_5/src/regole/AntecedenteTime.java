@@ -17,15 +17,7 @@ public class AntecedenteTime implements Antecedente, Serializable{
 	private Time valore;
 	private String operatoreRelazionale;
 	
-	/**
-	 * Instantiates a new antecedente time.
-	 *
-	 * @param operatoreRelazionale
-	 * @param operando_b 
-	 * @pre: operatoreRelazionale!=null && operando_b!=null
-	 * @post: -
-	 * @invariant: operando_a!=null && valore!=null && operatoreRelazionale!=null
-	 */
+
 	public AntecedenteTime(String operatoreRelazionale , Time operando_b) 
 	{
 		this.operando_a = new Time(new Orologio());
@@ -33,13 +25,6 @@ public class AntecedenteTime implements Antecedente, Serializable{
 		this.operatoreRelazionale = operatoreRelazionale;
 	}
 
-	/**
-	 * Valuta antecedente.
-	 * 
-	 * @pre: - 
-	 * @post: -
-	 * @return true, if successful
-	 */
 	@Override
 	public boolean valutaAntecedente() {
 		
@@ -49,15 +34,7 @@ public class AntecedenteTime implements Antecedente, Serializable{
 		return targetOperation.confronto(new ValoreNumerico(operando_a.minutiTotali()), new ValoreNumerico(valore.minutiTotali()));
 	}
 
-	/**
-	 * Sets the antecedente.
-	 *
-	 * @param <T> the generic type
-	 * @param operatore_a 
-	 * @param operatoreRelazionale 
-	 * @param operatore_b 
-	 * @pre: operatore_a!=null && operatoreRelazionale!=null && operatore_b!=null
-	 */
+	
 	@Override
 	public <T> void setAntecedente(T operatore_a, String operatoreRelazionale, T operatore_b) {
 
@@ -67,37 +44,16 @@ public class AntecedenteTime implements Antecedente, Serializable{
 		
 	}
 	
-	/**
-	 * Gets the operando a.
-	 *
-	 * @pre: -
-	 * @post: -
-	 * @return the operando a
-	 */
 	public Time getOperando_a() 
 	{
 		return operando_a;
 	}
 
-	/**
-	 * Gets the valore.
-	 * 
-	 * @pre: -
-	 * @post: -
-	 * @return the valore
-	 */
 	public Time getValore() 
 	{
 		return valore;
 	}
 
-	/**
-	 * Stampa antecedente.
-	 *
-	 * @pre: -
-	 * @post: sb!=null
-	 * @return the string
-	 */
 	@Override
 	public String stampaAntecedente() {
 		StringBuilder sb = new StringBuilder();

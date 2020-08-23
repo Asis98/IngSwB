@@ -20,6 +20,9 @@ import costanti.Messaggi;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
 import liste.ListaUnitaDomotiche;
+import liste.ListaUnitaRilevazione;
+import regole.Regola;
+import regole.StatoRegola;
 import rilevazione.Attuatore;
 import rilevazione.Sensore;
 import rilevazione.UnitaRilevazione;
@@ -131,6 +134,18 @@ public class Modelinserimento {
 		categoria.getModalitaOperative(numeroModalitaOperativa).getParametro(numeroParametro).setValore(valore);
 		return categoria;
 	}
+	public ModalitaOperativa setValoreParametro(ModalitaOperativa modOp, int numeroParametro, double valore)
+	{
+		modOp.getParametro(numeroParametro).setValore(valore);
+		return modOp;
+	}
+	public Attuatore setAttuatore(Attuatore attuatore, ModalitaOperativa modOp)
+	{
+		Attuatore att = new Attuatore();
+		att = attuatore;
+		att.setModOperativa(modOp);
+		return att;
+	}
 	
 	public Attuatore setModalitaOperativa(CategoriaAttuatori categoria, int numeroModalitaOperativa, Attuatore attuatore)
 	{
@@ -161,6 +176,22 @@ public class Modelinserimento {
 		return unita;
 	}
 	
+	public Sensore setOperandoSensore(ListaUnitaRilevazione lista, int numeroSensore, int numeroInfoRil)
+	{
+		Sensore operando = new Sensore(lista.getElemento(numeroSensore).getNomeUnita()); 
+		operando.setCategoria(lista.getElemento(numeroSensore).getCategoria());
+		operando.addMisurazione(((Sensore) lista.getElemento(numeroSensore)).getInfoRilevabile(numeroInfoRil));
+		return operando;
+	}
+
+	public Regola valutaRegola(Regola regola)
+	{
+		if(regola.valutaRegola())
+			regola.setStato(StatoRegola.ABILITATA);
+		else
+			regola.setStato(StatoRegola.DISABILITATA);
+		return regola;
+	}
 	public ListaImmobili caricaImmobilidaFile(String path, ListaImmobili lista)
 	{
 		ListaImmobili unitaCaricate = new ListaImmobili();

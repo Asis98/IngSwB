@@ -14,77 +14,35 @@ public class Sensore extends UnitaRilevazione{
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<InfoRilevabile> listaMisurazioni;
-		
-	/**
-	 * Instantiates a new sensore.
-	 *
-	 * @param nome 
-	 * @pre: nome!=null
-	 * @post: -
-	 * @invariant: valoreRilevato!=null && listaMisurazioni!=null
-	 */
+
 	public Sensore(String nome) {
 		super(nome);
 		listaMisurazioni = new ArrayList<InfoRilevabile>();
 	}
 	
-	/**
-	 * Instantiates a new sensore.
-	 * 
-	 * @pre: -
-	 * @post: -
-	 * @invariant: valoreRilevato!=null && listaMisurazioni!=null
-	 */
+
 	public Sensore()
 	{
 		super();
 		listaMisurazioni = new ArrayList<InfoRilevabile>();
 	}
 	
-	
-	/**
-	 * Sets the nome unita.
-	 *
-	 * @param nome the new nome unita
-	 * @pre: nome!=null
-	 * @post: -
-	 */
+
 	public void setNomeUnita(String nome)
 	{
 		super.setNomeUnita(nome);
 	}
 	
-	/**
-	 * Gets the nome unita.
-	 *
-	 * @pre: -
-	 * @post: super.getNomeUnita()!=null
-	 * @return super.getNomeUnita()
-	 */
 	public String getNomeUnita()
 	{
 		return super.getNomeUnita();
 	}
 	
-	/**
-	 * Sets the categoria.
-	 *
-	 * @param categoria 
-	 * @pre: categoria!=null
-	 * @post: -
-	 */
 	public void setCategoria(Categoria categoria)
 	{
 		super.setCategoria(categoria);
 	}
 	
-	/**
-	 * Gets the categoria.
-	 *
-	 * @pre: -
-	 * @post: (CategoriaSensori)super.getCategoria()!=null
-	 * @return (CategoriaSensori)super.getCategoria()
-	 */
 	public CategoriaSensori getCategoria()
 	{
 		return (CategoriaSensori)super.getCategoria();
@@ -94,25 +52,11 @@ public class Sensore extends UnitaRilevazione{
 	{
 		return super.getNomeCategoria();
 	}
-	/**
-	 * Sets the unita domotica.
-	 *
-	 * @param unita the new unita domotica
-	 * @pre unita!=null
-	 * @post: -
-	 */
 	public void setUnitaDomotica(UnitaDomotica unita)
 	{
 		super.setUnitaDomotica(unita);
 	}
 	
-	/**
-	 * Gets the unita domotica.
-	 *
-	 * @pre: -
-	 * @post: super.getUnitaDomotica()!=null
-	 * @return super.getUnitaDomotica()
-	 */
 	public UnitaDomotica getUnitaDomotica()
 	{
 		return super.getUnitaDomotica();
@@ -122,25 +66,12 @@ public class Sensore extends UnitaRilevazione{
 	{
 		return super.getNomeUnitaDomotica();
 	}
-	/**
-	 * Gets the stato.
-	 *
-	 * @pre: -
-	 * @post: super.getStato()!=null
-	 * @return super.getStato()
-	 */
+
 	public Stato getStato()
 	{
 		return super.getStato();
 	}
 	
-	/**
-	 * Sets the stato.
-	 *
-	 * @param stato the new stato
-	 * @pre: stato!=null
-	 * @post: -
-	 */
 	public void setStato(Stato stato)
 	{
 		super.setStato(stato);
@@ -151,53 +82,22 @@ public class Sensore extends UnitaRilevazione{
 	 * ------------------------------------------------------------------------------------------------------------------------------------------------
 	 */
 	
-	/**
-	 * Adds the misurazione.
-	 *
-	 * @param nomeSensore
-	 * @param valore 
-	 * @pre: nomeSensore!=null && misuraSensore!=null 
-	 * @post: listaMisurazioni.size() = listaMisurazioni.size()@pre + 1 
-	 * @post: @forall k : [0..size()-2]
-	 * (k < (listaMisurazioni.size()-1)) ==> element(k)@pre == element(k))
-	 */
 	public void addMisurazione(InfoRilevabile infoRilevabile)
 	{
 			//nomeInfoRil= nomeInfoRil + " Misura " + listaMisurazioni.size() + " :";
 			listaMisurazioni.add(infoRilevabile);
 	}
 	
-	/**
-	 * Size.
-	 * @pre: -
-	 * @post: listaMisurazioni.size()>=0
-	 * @return the int
-	 */
 	public int size()
 	{
 		return listaMisurazioni.size();
 	}
 	
-	/**
-	 * Gets the lista misurazioni.
-	 * 
-	 * @pre: -
-	 * @post: (ArrayList -InfoRilevabile-)listaMisurazioni!=null
-	 * @return the lista misurazioni
-	 */
 	public ArrayList<InfoRilevabile> getListaMisurazioni()
 	{
 		return  listaMisurazioni;
 	}
-	
-	/**
-	 * Prints the key value.
-	 * 
-	 * @pre: -
-	 * @post: sb!=null
-	 * @return the string
-	 
-	 */
+
 	public String printListaMisurazioni()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -216,14 +116,6 @@ public class Sensore extends UnitaRilevazione{
 		return sb.toString();
 	}
 	
-	/**
-	 * InfoRilevabile gia presente.
-	 *
-	 * @param nomeInfoRilevabile 
-	 * @pre: nomeInfoRilevabile !=null 
-	 * @post: -
-	 * @return true, if successful
-	 */
 	public boolean nomeInfoRilPresente(String nomeInfoRilevabile)
 	{
 		boolean presente = false;
@@ -236,14 +128,6 @@ public class Sensore extends UnitaRilevazione{
 	}
 	
 	
-	/**
-	 * Gets the info rilevabile.
-	 *
-	 * @param i 
-	 * @pre: i>=0
-	 * @post: listaMisurazioni.get(i)!=null
-	 * @return the info rilevabile
-	 */
 	public InfoRilevabile getInfoRilevabile(int i)
 	{
 		return listaMisurazioni.get(i);

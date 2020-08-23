@@ -16,16 +16,6 @@ public class AntecedenteCostante implements Antecedente, Serializable, StatoOper
 	private Valore costante;
 	private String operatoreRelazionale;
 	
-	/**
-	 * Instantiates a new antecedente.
-	 *
-	 * @param operando_a 
-	 * @param operatoreRelazionale 
-	 * @param costante
-	 * @pre:  operando_a!=null && operatoreRelazionale!=null && costante!=null
-	 * @post: -
-	 * @invariant: operando_a!=null && operatoreRelazionale!=null && costante!=null
-	 */
 	public AntecedenteCostante(Sensore operando_a,  String operatoreRelazionale, Valore costante) 
 	{
 		this.operando_a = operando_a;
@@ -33,13 +23,6 @@ public class AntecedenteCostante implements Antecedente, Serializable, StatoOper
 		this.operatoreRelazionale = operatoreRelazionale;
 	}
 	
-	/**
-	 * Valuta antecedente.
-	 *
-	 * @pre: -
-	 * @post: -
-	 * @return true, if successful
-	 */
 	public boolean valutaAntecedente()
 	{
 		BoolFunct targetOperation = BooleanOperator
@@ -48,15 +31,6 @@ public class AntecedenteCostante implements Antecedente, Serializable, StatoOper
 		return targetOperation.confronto(operando_a.getInfoRilevabile(Costanti.MIN).getValoreAttuale(), costante);
 	}
 	
-	/**
-	 * Sets the antecedente.
-	 *
-	 * @param a 
-	 * @param opRelazionale
-	 * @param costante
-	 * @pre: a!=null && opRelazionale!=null && costante!=null
-	 * @post: -
-	 */
 	public <T> void setAntecedente(T a, String opRelazionale, T costante)
 	{
 		this.operando_a = (Sensore) a;
@@ -64,40 +38,16 @@ public class AntecedenteCostante implements Antecedente, Serializable, StatoOper
 		this.operatoreRelazionale= opRelazionale;
 	}
 
-	
-	/**
-	 * Gets the sensore antecedente.
-	 *
-	 * @param a 
-	 * @param opRelazionale
-	 * @param costante
-	 * @pre: a!=null && opRelazionale!=null && costante!=null
-	 * @post: -
-	 */
 	public String getSensoreAntecedente() 
 	{
 		return operando_a.getNomeUnita();
 	}
 
-	/**
-	 * Gets the costante.
-	 * 
-	 * @pre: -
-	 * @post: -
-	 * @return the costante
-	 */
 	public Valore getCostante() 
 	{
 		return costante;
 	}
 	
-	/**
-	 * Stampa antecedente.
-	 *
-	 * @pre: -
-	 * @post: sb!=null
-	 * @return the string
-	 */
 	public String stampaAntecedente()
 	{
 		StringBuilder sb = new StringBuilder();
