@@ -9,6 +9,7 @@ import liste.ListaCategorie;
 import regole.Regola;
 import rilevazione.Attuatore;
 import rilevazione.Sensore;
+import utility.Dati;
 
 public class ControllerVisualizzazione {
 	
@@ -154,6 +155,17 @@ public class ControllerVisualizzazione {
 				view.stampaMessaggio(Costanti.RISULTATO+ elemento.valutaRegola());
 				i++;
 			}
+		}
+	}
+	
+	public void visualizzaImmobili(Dati dati)
+	{
+		if(dati.getListaUnitaImmobiliari().isEmpty())
+		{
+			view.stampaMessaggio(Messaggi.LISTA_IMMOBILI_VUOTA);
+		}
+		else {
+			view.stampaMessaggio(dati.getListaUnitaImmobiliari().stampaListaUnitaImmobiliari());
 		}
 	}
 	

@@ -5,10 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import costanti.Case;
-import gestioneMenu.M_Visualizza_Categorie;
-import gestioneMenu.M_Visualizza_Unita_Immobiliari;
 import gestioneMenu.MenuCommand;
-import gestioneMenu.MenuImmobileFruitore;
 
 public class MV_AD_Unita_Rilevazione 
 {

@@ -14,7 +14,7 @@ public class AD_Attiva_Attuatore implements MenuCommand
 	DatiUtente input= new DatiUtente();
 	
 	@Override
-	public void esegui() {
+	public void esegui(Dati dati) {
 		// TODO Auto-generated method stub
 		/*if(immobile.sizeListaAttuatoriDisattivati() == 0)
 		{

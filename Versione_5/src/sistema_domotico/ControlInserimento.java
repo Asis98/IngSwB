@@ -22,6 +22,7 @@ import gestioneMenu.MV_Regole;
 import gestioneMenu.MV_StanzaArtefatto;
 import gestioneMenu.MenuCommand;
 import inputUtente.DatiUtente;
+import inputUtente.InputDati;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
 import liste.ListaRegole;
@@ -36,6 +37,7 @@ import rilevazione.Sensore;
 import rilevazione.UnitaRilevazione;
 import time.Orologio;
 import time.Time;
+import utility.Dati;
 import utility.MyMenu;
 
 public class ControlInserimento {
@@ -50,7 +52,7 @@ public class ControlInserimento {
 	 */	
 	
 	
-	public void inserisciUnitaImmobiliare(ListaImmobili listaImmobili)
+	public ListaImmobili inserisciUnitaImmobiliare(ListaImmobili listaImmobili)
 	{
 		//qui non va il controllo se è unico o no perchè tanto richiamando questo metodo setto solo una variabile e non istanzio nessun nuovo oggetto
 		
@@ -60,6 +62,7 @@ public class ControlInserimento {
 		else
 			view.stampaMessaggio(Messaggi.MESSAGGIO_ELEMENTO_ESISTENTE);
 		
+		return listaImmobili;
 	}
 	
 	//FARE INSERIMENTO UNITA' DOMOTICHE
@@ -770,6 +773,27 @@ public class ControlInserimento {
 		}
 		return listaCategorie;
 	}
+	
+	public Immobile scegliImmobile(Dati dati)
+	{
+		Immobile immobile = null;
+		
+		if(dati.getListaUnitaImmobiliari().isEmpty())
+		{
+			view.stampaMessaggio(Messaggi.LISTA_IMMOBILI_VUOTA);
+			dati.setListaUnitaImmobiliari(dati.getListaUnitaImmobiliari());
+			immobile = dati.getListaUnitaImmobiliari().getImmobile(Costanti.MIN);
+		}
+		else {
+				view.stampaMessaggio(dati.getListaUnitaImmobiliari().stampaListaUnitaImmobiliari());
+				int numeroUnitaImmobiliare = view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_NUMERO_IMMOBILE, 
+						Costanti.MIN, ((dati.getListaUnitaImmobiliari().size())-1));
+				immobile = dati.getListaUnitaImmobiliari().getImmobile(numeroUnitaImmobiliare);
+		}
+		
+		return immobile;
+	}
+	
 
 	
 
