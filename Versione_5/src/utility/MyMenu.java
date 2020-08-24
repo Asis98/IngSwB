@@ -1,5 +1,6 @@
 package utility;
 
+import costanti.Costanti;
 import inputUtente.*;
 
 /*
@@ -32,18 +33,21 @@ public class MyMenu
 	return input.leggiIntero(RICHIESTA_INSERIMENTO, 0, voci.length);	 
   }
 		
-  public void stampaMenu ()
+  public String stampaMenu ()
   {
-	System.out.println(CORNICE);
-	System.out.println("\t"+titolo.toUpperCase()); //\t e toUpperCase nuovi
-	System.out.println(CORNICE);
+	StringBuilder sb = new StringBuilder();
+	sb.append(CORNICE);
+	sb.append("\t"+titolo.toUpperCase()); //\t e toUpperCase nuovi
+	sb.append(CORNICE);
     for (int i=0; i<voci.length; i++)
 	 {
-	  System.out.println( (i+1) + "\t" + voci[i]);
+    	sb.append( (i+1) + "\t" + voci[i]);
 	 }
-    System.out.println();
-	System.out.println(VOCE_USCITA);
-    System.out.println();
+    sb.append(Costanti.STRINGA_VUOTA);
+    sb.append(VOCE_USCITA);
+    sb.append(Costanti.STRINGA_VUOTA);
+    
+    return sb.toString();
   }
 		
 }

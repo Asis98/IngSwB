@@ -1,6 +1,10 @@
 package ambiente;
 
+import java.util.ArrayList;
+
 import liste.*;
+import regole.Regola;
+import rilevazione.UnitaRilevazione;
 
 public class Immobile {
 
@@ -83,7 +87,51 @@ public class Immobile {
 		this.listaRegole = listaRegole;
 	}
 
+	public ArrayList<UnitaRilevazione> getAttuatoriAttivi()
+	{
+		return listaAttuatori.getListaUnitaAttive();
+	}
 	
+	public ArrayList<UnitaRilevazione> getAttuatoriDisattivi()
+	{
+		return listaAttuatori.getListaUnitaDisattive();
+	}
+	
+	public ArrayList<UnitaRilevazione> getSensoriAttivi()
+	{
+		return listaSensori.getListaUnitaAttive();
+	}
+	
+	public ArrayList<UnitaRilevazione> getSensoriDisattivi()
+	{
+		return listaSensori.getListaUnitaDisattive();
+	}
+	
+	public UnitaRilevazione getNumeroAttuatoreDisattivo(int numero)
+	{
+		return listaAttuatori.getListaUnitaDisattive().get(numero);
+	}
+	
+	public UnitaRilevazione getNumeroSensoreDisattivo(int numero)
+	{
+		return listaSensori.getListaUnitaDisattive().get(numero);
+	}
+	
+	public UnitaRilevazione getNumeroAttuatoreAttivo(int numero)
+	{
+		return listaAttuatori.getListaUnitaAttive().get(numero);
+	}
+	
+	public UnitaRilevazione getNumeroSensoreAttivo(int numero)
+	{
+		return listaSensori.getListaUnitaAttive().get(numero);
+	}
+	
+	public Regola getNumeroRegola(int i)
+	{
+		return listaRegole.getRegola(i);
+	}
+
 	
 	
 }

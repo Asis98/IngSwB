@@ -202,4 +202,9 @@ public class Regola implements Serializable{
 		return false;
 	}
 	
+	public String getNomeAttuatoreConseguente(int i)
+	{
+		return getConseguente(i).getAttuatore().getNomeUnita();
+	}
+	
 }

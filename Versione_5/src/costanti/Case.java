@@ -38,6 +38,13 @@ public class Case {
 	public static final int REGOLE_SENSORE_COSTANTE = 2;
 	public static final int REGOLE_SENSORE_TIME = 3;
 	
+	public static final int ATTIVA_SENSORE= 1;
+	public static final int ATTIVA_ATTUATORE= 2;
+	public static final int DISATTIVA_SENSORE= 3;
+	public static final int DISATTIVA_ATTUATORE= 4;
+	public static final int ATTIVA_REGOLA= 1;
+	public static final int DISATTIVA_REGOLA= 2;
+	
 	
 	
 }

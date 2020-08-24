@@ -67,7 +67,7 @@ public class ControlInserimento {
 	public void inserimentoUnitaDomotica(Immobile immobile)
 	{
 		MyMenu menuManutentore= new MyMenu(TitoliMenu.TITOLOUNITADOMOTICA,VociMenu.VOCIUNITADOMOTICA);
-		menuManutentore.stampaMenu();
+		view.stampaMessaggio(menuManutentore.stampaMenu());
 		int scelta;
 		do {
 			scelta = view.inputLeggiIntero(Messaggi.SCEGLI_VOCE);
