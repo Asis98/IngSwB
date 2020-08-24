@@ -10,6 +10,7 @@ public class Dati {
 	ListaImmobili listaUnitaImmobiliari;
 	Immobile immobile;
 	ListaCategorie listaCategorieSensori;
+	ListaCategorie listaCatInutile;
 	
 	public void setListaCategorieSensori(ListaCategorie listaCategorieSensori) {
 		this.listaCategorieSensori = listaCategorieSensori;
