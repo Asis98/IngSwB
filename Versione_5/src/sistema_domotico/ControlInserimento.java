@@ -67,7 +67,7 @@ public class ControlInserimento {
 	
 	//FARE INSERIMENTO UNITA' DOMOTICHE
 	
-	public void inserimentoUnitaDomotica(Immobile immobile)
+	public Immobile inserimentoUnitaDomotica(Immobile immobile)
 	{
 		MyMenu menuManutentore= new MyMenu(TitoliMenu.TITOLOUNITADOMOTICA,VociMenu.VOCIUNITADOMOTICA);
 		view.stampaMessaggio(menuManutentore.stampaMenu());
@@ -80,6 +80,8 @@ public class ControlInserimento {
 		
 			targetOperation.esegui();
 		}while(scelta !=0);
+		
+		return immobile;
 	}
 	
 	public void inserisciStanza(Immobile immobile)
@@ -155,7 +157,7 @@ public class ControlInserimento {
  * ------------------------------------------------------------------------------------------------------------------------------------------------
  */
 		
-	public void inserisciCategoria(ListaCategorie listaCategorie, Categoria categoria)
+	public ListaCategorie inserisciCategoria(ListaCategorie listaCategorie, Categoria categoria)
 	{	
 		String nomeCategoria = view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_CATEGORIA);
 		
@@ -186,6 +188,8 @@ public class ControlInserimento {
 			
 		else
 			view.stampaMessaggio(Costanti.CATEGORIA + Costanti.SPAZIO + (categoria instanceof CategoriaAttuatori ? Costanti.ATTUATORE : Costanti.SENSORE) + Messaggi.GIA_PRESENTE);
+		
+		return listaCategorie;
 	}
 	
 	public CategoriaAttuatori helpInserisciModalitaOperative(CategoriaAttuatori categoria)
@@ -288,7 +292,7 @@ public class ControlInserimento {
 	 * METODI INSERIMENTO UNITA' RILEVAZIONE (SENSORI / ATTUATORI)
 	 * ------------------------------------------------------------------------------------------------------------------------------------------------
 	 */	
-	public void inserisciUnitaRilevazione(UnitaRilevazione unita, ListaCategorie listaCategorie, Immobile immobile)
+	public ListaUnitaRilevazione inserisciUnitaRilevazione(UnitaRilevazione unita, ListaCategorie listaCategorie, Immobile immobile)
 	{	
 		/*
 		 * se la lista delle categorie e la lista delle unità domotiche sono vuote non ha senso inserire un attuatore
@@ -381,7 +385,7 @@ public class ControlInserimento {
 			view.stampaMessaggio(Messaggi.INSERIMENTO_NON_VALIDO + 
 			(immobile.getUnitList().isEmpty()? (Messaggi.LISTA_UNITA_DOMOTICHE + Messaggi.AVVISO_LISTA_UN_DOMOTICHE_VUOTA) : (Messaggi.LISTA_CATEGORIE + Messaggi.AVVISO_LISTA_CATEGORIE_VUOTA)));
 		
-		
+		return listaUnitaRilevazione;
 	}
 	
 	public Attuatore scegliModalitaOperativa(Attuatore attuatore, CategoriaAttuatori categoria)

@@ -1,6 +1,7 @@
 package utility;
 
 import ambiente.Immobile;
+import categorie.Categoria;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
 
@@ -10,6 +11,8 @@ public class Dati {
 	ListaImmobili listaUnitaImmobiliari;
 	Immobile immobile;
 	ListaCategorie listaCategorieSensori;
+	Categoria categoriaSensori;
+	Categoria categoriaAttuatori;
 	
 	public void setListaCategorieSensori(ListaCategorie listaCategorieSensori) {
 		this.listaCategorieSensori = listaCategorieSensori;
@@ -23,7 +26,6 @@ public class Dati {
 	public void setImmobile(Immobile immobile) {
 		this.immobile = immobile;
 	}
-
 	public ListaCategorie getListaCategorieSensori() {
 		return listaCategorieSensori;
 	}
