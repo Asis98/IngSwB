@@ -29,9 +29,10 @@ public class Main {
 			
 	private static ListaCategorie listaCategorieAttuatori;
 	private static ListaCategorie listaCategorieSensori;
-	private static UnitaImmobiliare immobile;
+	private static Immobile immobile;
 	private static ListaImmobili listaUnitaImmobiliari ;
 	private static DatiUtente input;
+
 	
 	public static void main(String[] args) {
 				

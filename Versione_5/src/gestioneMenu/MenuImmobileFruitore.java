@@ -1,38 +1,25 @@
 package gestioneMenu;
 
-import ambiente.Immobile;
-import costanti.Costanti; 
-import costanti.Messaggi;
-import costanti.NomiFile;
-import inputUtente.DatiUtente;
-import inputUtente.InputDati;
-import liste.ListaImmobili;
+
+import sistema_domotico.ControlInserimento;
 import utenti.Fruitore;
+import utility.Dati;
 
 public class MenuImmobileFruitore implements MenuCommand {
 
 	private Fruitore fruitore= new Fruitore();
+	ControlInserimento	controlInserimento = new ControlInserimento();
 	
 	@Override
-	public void esegui() {
+	public void esegui(Dati dati) {
 		
 		//ListaImmobili listaUnitaImmobiliari;
 		//Immobile immobile;
 		// TODO Auto-generated method stub
-		DatiUtente input= new DatiUtente();
-		if(listaUnitaImmobiliari.isEmpty())
-		{
-			System.out.println(Messaggi.LISTA_IMMOBILI_VUOTA);
-		}
-		else {
-				System.out.println(listaUnitaImmobiliari.stampaListaUnitaImmobiliari());
-				int numeroUnitaImmobiliare = input.leggiIntero(Messaggi.MESSAGGIO_INSERIMENTO_NUMERO_IMMOBILE, Costanti.MIN, ((listaUnitaImmobiliari.size())-1));
-				//immobile = listaUnitaImmobiliari.getUnitaImmobiliare(numeroUnitaImmobiliare);
-				immobile = listaUnitaImmobiliari.getImmobile(numeroUnitaImmobiliare);
-				
+		
+				controlInserimento.scegliImmobile(dati);
 				fruitore.gestioneImmobileView();
 				
-		}
 		
 	}
 }

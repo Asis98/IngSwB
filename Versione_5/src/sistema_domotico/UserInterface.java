@@ -1,7 +1,10 @@
 package sistema_domotico;
 
 import costanti.Messaggi;
+import costanti.TitoliMenu;
+import costanti.VociMenu;
 import inputUtente.DatiUtente;
+import utility.MyMenu;
 
 public class UserInterface {
 	
@@ -36,6 +39,24 @@ public class UserInterface {
 	{
 		return input.leggiIntero(messaggio);
 	}
+	public int inputLeggiInteroIntervallo(String messaggio, int num1, int num2)
+	{
+		return input.leggiIntero(messaggio, num1, num2);
+	}
+	
+	public void AD_stampa_menu_unita_rilevazione()
+	{
+		MyMenu menuGestioneStatoUnitaRilevazione = new MyMenu(TitoliMenu.TITOLOSTATOUNITARIL, VociMenu.VOCISTATOUNITARILEVAZIONE);
+		menuGestioneStatoUnitaRilevazione.stampaMenu();
+	}
+	
+	public void AD_stampa_menu_regole()
+	{
+		MyMenu menuRegole= new MyMenu(TitoliMenu.TITOLOATTIVADISATTIVA, VociMenu.VOCISTATOREGOLE);
+		menuRegole.stampaMenu();
+	}
+	
+	
 }
 
 

@@ -60,6 +60,8 @@ public class Messaggi {
 	public static final String ASSEGNARE_UN_ALTRA_INFORMAZIONE_RILEVABILE = "Vuoi assegnare un'altra informazione rilevabile? (si/no)";
 	public static final String INSERIRE_IL_NUMERO_DEL_DOMINIO = "Inserire il numero del dominio: ";
 	public static final String SCEGLI_VOCE = "Scegli voce: ";
+	public static final String MESSAGGIO_INESISTENZA_REGOLE_DISABILITATE= "Non esistono regole disabilitate";
+	public static final String MESSAGGIO_INESISTENZA_REGOLE_ABILITATE= "Non esistono regole abilitate";
 	
 	//Messaggi di Errore
 	public static final String MESSAGGIO_ELEMENTO_ESISTENTE = "L'elemento inserito e' gia presente.";

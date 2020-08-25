@@ -1,6 +1,6 @@
 package gestioneMenu;
 
-import categorie.CategoriaAttuatori;
+import categorie.CategoriaAttuatori; 
 import liste.ListaCategorie;
 import sistema_domotico.ControlInserimento;
 import utility.Dati;

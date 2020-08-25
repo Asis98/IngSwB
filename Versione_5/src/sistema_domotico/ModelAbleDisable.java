@@ -1,9 +1,12 @@
 package sistema_domotico;
 
-import ambiente.Immobile;
-import ambiente.UnitaImmobiliare;
+import ambiente.Immobile; 
 import categorie.Stato;
 import regole.AntecedenteSensore;
+import regole.StatoRegola;
+import rilevazione.Attuatore;
+import rilevazione.Sensore;
+
 
 public class ModelAbleDisable 
 {
@@ -45,5 +48,50 @@ public class ModelAbleDisable
 		}
 		
 		return false;
+	}
+	
+	public void model_attivaRegola(Immobile immobile, Attuatore attuatore)
+	{
+		for(int i=0; i<immobile.getListaRegole().contaRegoleDisabilitate(); i++) 
+		{
+			/*attivo una regola <-> in un suo conseguente è contenuto attuatore e tutti gli attuatori
+			 * contenuti nei conseguenti sono attivi
+			 * e tutti i sensori contenuti nei conseguenti sono attivi
+			 */
+			
+			if(immobile.getNumeroRegola(i).cercaAttuatore(attuatore) && immobile.getNumeroRegola(i).antecedentiAttivi() && immobile.getNumeroRegola(i).conseguentiAttivi())
+				immobile.getNumeroRegola(i).setStato(StatoRegola.ABILITATA);
+		}
+	}
+	
+	public void model_attivaRegola(Immobile immobile, Sensore sensore)
+	{
+		for(int i=0; i<immobile.getListaRegole().contaRegoleDisabilitate(); i++)
+		{
+			/*attivo una regola <-> in un suo antecedente è contenuto sensore e tutti gli attuatori
+			 * contenuti nei conseguenti sono attivi
+			 * e tutti i sensori contenuti nei conseguenti sono attivi
+			 */
+			if(immobile.getNumeroRegola(i).cercaSensore(sensore) && immobile.getNumeroRegola(i).antecedentiAttivi() && immobile.getNumeroRegola(i).conseguentiAttivi())
+				immobile.getNumeroRegola(i).setStato(StatoRegola.ABILITATA);
+		}
+	}
+	
+	public void model_disattivaRegola(Immobile immobile, Attuatore attuatore2)
+	{
+		for(int i=0; i<immobile.getListaRegole().contaRegoleAbilitate(); i++)
+		{
+			if(immobile.getNumeroRegola(i).cercaAttuatore(attuatore2))
+				immobile.getNumeroRegola(i).setStato(StatoRegola.DISABILITATA);
+		}
+	}
+	
+	public void model_disattivaRegola(Immobile immobile, Sensore sensore2)
+	{
+		for(int i=0; i<immobile.getListaRegole().contaRegoleAbilitate(); i++)
+		{
+			if(immobile.getNumeroRegola(i).cercaSensore(sensore2))
+				immobile.getNumeroRegola(i).setStato(StatoRegola.DISABILITATA);
+		}
 	}
 }
