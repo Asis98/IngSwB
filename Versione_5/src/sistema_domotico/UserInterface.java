@@ -1,6 +1,5 @@
 package sistema_domotico;
 
-import costanti.Messaggi;
 import costanti.TitoliMenu;
 import costanti.VociMenu;
 import inputUtente.DatiUtente;

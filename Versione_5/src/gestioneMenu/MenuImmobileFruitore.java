@@ -13,8 +13,6 @@ public class MenuImmobileFruitore implements MenuCommand {
 	@Override
 	public void esegui(Dati dati) {
 		
-		//ListaImmobili listaUnitaImmobiliari;
-		//Immobile immobile;
 		// TODO Auto-generated method stub
 		
 				controlInserimento.scegliImmobile(dati);

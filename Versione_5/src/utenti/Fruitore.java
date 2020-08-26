@@ -81,16 +81,14 @@ private String nomeUtente;
 		gestioneImmobileFruitore.stampaMenu();
 		int scelta;
 		
-		//do {
-		//	scelta = input.inputLeggiIntero(Messaggi.SCEGLI_VOCE);
-			
+		
 			MenuCommand targetOperation = MV_ImmobileFruitore
 			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
 			targetOperation.esegui();
 		
-		//} while(scelta!=0);
+		
 		
 		
 	}
