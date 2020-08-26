@@ -4,6 +4,7 @@ import ambiente.Immobile;
 import categorie.Categoria;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
+import liste.ListaRegole;
 
 public class Dati {
 	
@@ -13,7 +14,7 @@ public class Dati {
 	ListaCategorie listaCategorieSensori;
 	Categoria categoriaSensori;
 	Categoria categoriaAttuatori;
-	
+
 	public void setListaCategorieSensori(ListaCategorie listaCategorieSensori) {
 		this.listaCategorieSensori = listaCategorieSensori;
 	}
