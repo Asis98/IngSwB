@@ -12,7 +12,7 @@ public class M_Attiva_Disattiva_Unita_Rilevazione implements MenuCommand {
 	public void esegui(Dati dati) {
 		// TODO Auto-generated method stub
 		Immobile immobile= dati.getImmobile();
-		dati.setImmobile(controllerAD.gestisciStatoUnitaRilevazione(immobile));
+		dati.setImmobile(controllerAD.gestisciStatoUnitaRilevazione(immobile, dati));
 		
 	}
 

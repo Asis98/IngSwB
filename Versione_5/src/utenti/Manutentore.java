@@ -9,81 +9,60 @@ import gestioneMenu.MV_Manutentore;
 import gestioneMenu.MV_User;
 import gestioneMenu.MenuCommand;
 import inputUtente.DatiUtente;
+import utility.Dati;
 import utility.MyMenu;
 
 public class Manutentore implements Utente{
 	
 private String nomeUtente;
 	
-	/**
-	 * Instantiates a new utente.
-	 *
-	 * @param nomeUtente 
-	 * @pre: nomeUtente!=null
-	 * @post: -
-	 * @invariant: nomeUtente!=null 
-	 */
 	public Manutentore(String nomeUtente)
 	{
 		this.nomeUtente = nomeUtente;
 	}
 	
-	/**
-	 * Instantiates a new utente.
-	 */
 	public Manutentore()
 	{
 		this.nomeUtente = Costanti.STRINGA_VUOTA;
 	}
 	
-	/**
-	 * Gets the nome utente.
-	 * 
-	 * @pre: -
-	 * @post: -
-	 * @return nomeUtente
-	 */
 	public String getNomeUtente()
 	{
 		return nomeUtente;
 	}
 	
-	/**
-	 * Sets the nome utente.
-	 *
-	 * @param nomeUtente the new nome utente
-	 * @pre: nomeUtente!=null
-	 * @post: -
-	 */
 	public void setNomeUtente(String nomeUtente)
 	{
 		this.nomeUtente = nomeUtente; 
 	}
 
 	@Override
-	public void menuPersonalizzato() {
+	public void menuPersonalizzato(Dati dati) {
 		// TODO Auto-generated method stub
 		MyMenu menuManutentore= new MyMenu(TitoliMenu.TITOLOMANUTENTORE,VociMenu.VOCIMANUTENTORE);
-		menuManutentore.stampaMenu();
-		
-		MenuCommand targetOperation = MV_Manutentore
-			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
-			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
-		
-		targetOperation.esegui();
+		System.out.println(menuManutentore.stampaMenu());
+		int scelta = 0;
+		do {
+			scelta =new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE);
+			MenuCommand targetOperation = MV_Manutentore
+				      .getOperation(scelta)
+				      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
+			
+			targetOperation.esegui(dati);
+		}while(scelta!=0);
 	}
 
 	@Override
-	public void gestioneImmobileView() {
+	public void gestioneImmobileView(Dati dati) {
 		// TODO Auto-generated method stub
 		MyMenu gestioneImmobileManutentore = new MyMenu(TitoliMenu.TITOLOMENUIMMOBILE, VociMenu.VOCIIMMOBILE);
-		gestioneImmobileManutentore.stampaMenu();
+		System.out.println(gestioneImmobileManutentore.stampaMenu());
 		
 		MenuCommand targetOperation = MV_ImmobileAdmin
 			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
-		targetOperation.esegui();
+		targetOperation.esegui(dati);
 		
 		
 	}

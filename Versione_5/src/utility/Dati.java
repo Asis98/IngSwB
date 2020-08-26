@@ -2,9 +2,10 @@ package utility;
 
 import ambiente.Immobile;
 import categorie.Categoria;
+import categorie.CategoriaAttuatori;
+import categorie.CategoriaSensori;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
-import liste.ListaRegole;
 
 public class Dati {
 	
@@ -14,6 +15,16 @@ public class Dati {
 	ListaCategorie listaCategorieSensori;
 	Categoria categoriaSensori;
 	Categoria categoriaAttuatori;
+	
+	public Dati(Immobile immobile)
+	{
+		listaCategorieAttuatori = new ListaCategorie();
+		listaUnitaImmobiliari = new ListaImmobili();
+		listaCategorieSensori = new ListaCategorie();
+		categoriaSensori = new CategoriaSensori();
+		categoriaAttuatori = new CategoriaAttuatori();
+		this.immobile = immobile;
+	}
 
 	public void setListaCategorieSensori(ListaCategorie listaCategorieSensori) {
 		this.listaCategorieSensori = listaCategorieSensori;

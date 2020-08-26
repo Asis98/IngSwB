@@ -1,7 +1,6 @@
 package utenti;
 
-import ambiente.UnitaImmobiliare;
-import costanti.Costanti;
+import utility.Dati;
 
 public interface Utente {
 
@@ -23,8 +22,8 @@ public interface Utente {
 	 */
 	public void setNomeUtente(String nomeUtente);
 	
-	public void menuPersonalizzato();
+	public void menuPersonalizzato(Dati dati);
 	
-	public void gestioneImmobileView();
+	public void gestioneImmobileView(Dati dati);
 	
 }

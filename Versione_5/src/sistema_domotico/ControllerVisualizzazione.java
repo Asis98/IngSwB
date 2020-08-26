@@ -30,12 +30,12 @@ public class ControllerVisualizzazione {
 		{
 			if(model.visualizzazioneUnitaImmobiliari(immobile, i))
 			{
-				view.stampaMessaggio(immobile.getUnitList().getUnitaDomotica(i).getUnitName() + Costanti.TRATTINO + 
+				view.stampaMessaggio(immobile.getNomeUnitaDomotica(i) + Costanti.TRATTINO + 
 						(immobile.getUnitList().getUnitaDomotica(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO)+
-						Messaggi.FA_PARTE_DI +((Artefatto)immobile.getUnitList().getUnitaDomotica(i)).getStanza());
+						Messaggi.FA_PARTE_DI +((Artefatto)immobile.getUnitaDomoticaUnitList(i)).getStanza());
 			}
 			else
-			view.stampaMessaggio(immobile.getUnitList().getUnitaDomotica(i).getUnitName() + Costanti.TRATTINO + (immobile.getUnitList().getUnitaDomotica(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO));
+			view.stampaMessaggio(immobile.getNomeUnitaDomotica(i)  + Costanti.TRATTINO + (immobile.getUnitaDomoticaUnitList(i) instanceof Stanza ? Costanti.TYPESTANZA : Costanti.TYPEARTEFATTO));
 		}
 	}
 	
@@ -72,8 +72,8 @@ public class ControllerVisualizzazione {
 			view.stampaMessaggio(Costanti.ELENCO_SENSORI);
 		    for(int i=0;i<immobile.getListaSensori().size();i++)
 		    {
-		    	view.stampaMessaggio(immobile.getListaSensori().getElemento(i).getNomeUnita() + ": ");
-		    	view.stampaMessaggio(((Sensore)immobile.getListaSensori().getElemento(i)).printListaMisurazioni());
+		    	view.stampaMessaggio(immobile.getElementoListaSensori(i).getNomeUnita() + ": ");
+		    	view.stampaMessaggio(((Sensore)immobile.getElementoListaSensori(i)).printListaMisurazioni());
 		    }	
 		}else view.stampaMessaggio(Messaggi.AVVISO_LISTA_SENSORI_VUOTA);
 	}
@@ -104,15 +104,15 @@ public class ControllerVisualizzazione {
 		//raggruppo gli attuatori per stanza
 		for(int i =0; i<immobile.getUnitList().size();i++)
 		{
-			view.stampaMessaggio(immobile.getUnitList().getUnitaDomotica(i).getUnitName().toUpperCase());
+			view.stampaMessaggio(immobile.getUnitaDomoticaUnitList(i).getUnitName().toUpperCase());
 			
 			for(int c=0; c<immobile.getListaAttuatori().size();c++)
 			{
-				if(immobile.getListaAttuatori().getElemento(c).getUnitaDomotica().getUnitName().equalsIgnoreCase(immobile.getUnitList().getUnitaDomotica(i).getUnitName()))
+				if(immobile.getElementoListaAttuatori(c).getNomeUnitaDomotica().equalsIgnoreCase(immobile.getUnitList().getUnitaDomotica(i).getUnitName()))
 				{
-					view.stampaMessaggio("\t"+immobile.getListaAttuatori().getElemento(c).getNomeUnita());
+					view.stampaMessaggio("\t"+immobile.getElementoListaAttuatori(c).getNomeUnita());
 					view.stampaMessaggio("\t"+"\t"+Costanti.MODALITA_OPERATIVE);
-					view.stampaMessaggio("\t"+"\t"+"\t"+((Attuatore)immobile.getListaAttuatori().getElemento(c)).getModOperativa().printModNameParamValue());
+					view.stampaMessaggio("\t"+"\t"+"\t"+((Attuatore)immobile.getElementoListaAttuatori(c)).getModOperativa().printModNameParamValue());
 				}
 			}
 			

@@ -13,7 +13,7 @@ public class MenuImmobileAdmin implements MenuCommand {
 	@Override
 	public void esegui(Dati dati) {
 		// TODO Auto-generated method stub
-		manutentore.gestioneImmobileView();
+		manutentore.gestioneImmobileView(dati);
 		controlInserimento.scegliImmobile(dati);	
 	}
 }

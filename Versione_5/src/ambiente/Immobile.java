@@ -52,6 +52,16 @@ public class Immobile {
 		return unitList;
 	}
 	
+	public String getNomeUnitaDomotica(int i) 
+	{
+		return unitList.getNomeUnitaDomotica(i);
+	}
+	
+	public UnitaDomotica getUnitaDomoticaUnitList(int i)
+	{
+		return unitList.getUnitaDomotica(i);
+	}
+	
 	public void setUnitList(ListaUnitaDomotiche unitList) 
 	{
 		this.unitList = unitList;
@@ -62,6 +72,11 @@ public class Immobile {
 		return listaAttuatori;
 	}
 	
+	public UnitaRilevazione getElementoListaAttuatori(int i) 
+	{
+		return listaAttuatori.getElemento(i);
+	}
+	
 	public void setListaAttuatori(ListaUnitaRilevazione listaAttuatori) 
 	{
 		this.listaAttuatori = listaAttuatori;
@@ -70,6 +85,11 @@ public class Immobile {
 	public ListaUnitaRilevazione getListaSensori() 
 	{
 		return listaSensori;
+	}
+	
+	public UnitaRilevazione getElementoListaSensori(int i) 
+	{
+		return listaSensori.getElemento(i);
 	}
 	
 	public void setListaSensori(ListaUnitaRilevazione listaSensori) 

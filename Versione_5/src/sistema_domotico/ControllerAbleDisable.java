@@ -14,6 +14,7 @@ import regole.AntecedenteSensore;
 import regole.StatoRegola;
 import rilevazione.Attuatore;
 import rilevazione.Sensore;
+import utility.Dati;
 
 public class ControllerAbleDisable 
 {
@@ -24,7 +25,7 @@ public class ControllerAbleDisable
 	
 	
 	
-	public Immobile gestisciStatoUnitaRilevazione(Immobile immobile)
+	public Immobile gestisciStatoUnitaRilevazione(Immobile immobile, Dati dati)
 	{
 		if(!immobile.getListaAttuatori().isEmpty() && !immobile.getListaSensori().isEmpty())
 		{
@@ -37,13 +38,13 @@ public class ControllerAbleDisable
 			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
-				targetOperation.esegui();
+				targetOperation.esegui(dati);
 		    } while(scelta!=0);
 		}
 		return immobile;
 	}
 	
-	public  Immobile gestisciStatoRegole(Immobile immobile)
+	public  Immobile gestisciStatoRegole(Immobile immobile, Dati dati)
 	{
 		if(!immobile.getListaRegole().isEmptyRegole())
 		{
@@ -55,7 +56,7 @@ public class ControllerAbleDisable
 				      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 				      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 			
-			targetOperation.esegui();
+			targetOperation.esegui(dati);
 			} while(scelta!=0);
 		}
 		else 

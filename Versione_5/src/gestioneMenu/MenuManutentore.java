@@ -9,8 +9,8 @@ public class MenuManutentore implements MenuCommand{
 	
 	@Override
 	public void esegui(Dati dati) {
-		// TODO Auto-generated method stub
-		manutentore.menuPersonalizzato();
+		
+		manutentore.menuPersonalizzato(dati);
 	}
 	
 	

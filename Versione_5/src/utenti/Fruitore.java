@@ -8,6 +8,7 @@ import gestioneMenu.MV_Fruitore;
 import gestioneMenu.MV_ImmobileFruitore;
 import gestioneMenu.MenuCommand;
 import inputUtente.DatiUtente;
+import utility.Dati;
 import utility.MyMenu;
 
 public class Fruitore implements Utente{
@@ -60,7 +61,7 @@ private String nomeUtente;
 	}
 
 	@Override
-	public void menuPersonalizzato() {
+	public void menuPersonalizzato(Dati dati) {
 		// TODO Auto-generated method stub
 		MyMenu menuFruitore= new MyMenu(TitoliMenu.TITOLOFRUITORE,VociMenu.VOCIMENUFRUITORE);
 		menuFruitore.stampaMenu();
@@ -69,12 +70,12 @@ private String nomeUtente;
 			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
-		targetOperation.esegui();
+		targetOperation.esegui(dati);
 		
 	}
 
 	@Override
-	public void gestioneImmobileView() {
+	public void gestioneImmobileView(Dati dati) {
 		// TODO Auto-generated method stub
 		
 		MyMenu gestioneImmobileFruitore = new MyMenu(TitoliMenu.TITOLOMENUIMMOBILE,VociMenu.VOCISOTTOMENUFRUITORE);
@@ -86,7 +87,7 @@ private String nomeUtente;
 			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
-			targetOperation.esegui();
+			targetOperation.esegui(dati);
 		
 		
 		

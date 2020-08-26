@@ -16,7 +16,7 @@ public class MenuImmobileFruitore implements MenuCommand {
 		// TODO Auto-generated method stub
 		
 				controlInserimento.scegliImmobile(dati);
-				fruitore.gestioneImmobileView();
+				fruitore.gestioneImmobileView(dati);
 				
 		
 	}

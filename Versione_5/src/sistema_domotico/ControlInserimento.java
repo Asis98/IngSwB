@@ -67,7 +67,7 @@ public class ControlInserimento {
 	
 	//FARE INSERIMENTO UNITA' DOMOTICHE
 	
-	public Immobile inserimentoUnitaDomotica(Immobile immobile)
+	public Immobile inserimentoUnitaDomotica(Immobile immobile, Dati dati)
 	{
 		MyMenu menuManutentore= new MyMenu(TitoliMenu.TITOLOUNITADOMOTICA,VociMenu.VOCIUNITADOMOTICA);
 		view.stampaMessaggio(menuManutentore.stampaMenu());
@@ -78,7 +78,7 @@ public class ControlInserimento {
 			      .getOperation(scelta)
 			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
-			targetOperation.esegui();
+			targetOperation.esegui(dati);
 		}while(scelta !=0);
 		
 		return immobile;
@@ -499,7 +499,7 @@ public class ControlInserimento {
 	 */	
 	
 	
-	public void inserimentoRegole(Immobile immobile)
+	public void inserimentoRegole(Immobile immobile, Dati dati)
 	{
 		if(immobile.getListaSensori().isEmpty() || immobile.getListaAttuatori().isEmpty())
 		{
@@ -516,7 +516,7 @@ public class ControlInserimento {
 				MenuCommand targetOperation = MV_Regole
 				      .getOperation(scelta)
 				      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
-				targetOperation.esegui();
+				targetOperation.esegui(dati);
 			}while(scelta !=0);
 			
 			
@@ -589,6 +589,7 @@ public class ControlInserimento {
 		Sensore operando_a = new Sensore();
 		operando_a = scegliSensore(immobile);
 		String operatoreRelazionale = null;
+		
 		if(operando_a.getInfoRilevabile(Costanti.MIN).getValoreAttuale().getValore().getClass() == String.class)
 		{
 			operatoreRelazionale = Costanti.UGUALE;
@@ -643,13 +644,10 @@ public class ControlInserimento {
 		//setto il primo operando della regola
 		int	numeroSensore = view.inputInteriConMinimo(Messaggi.MESSAGGIO_SCELTA_OPERANDO, Costanti.MIN, listaSensori.size()-1);
 		
-		
 		//stampo le infoRilevabili del sensore
 		view.stampaMessaggio(((Sensore) listaSensori.getElemento(numeroSensore)).printListaMisurazioni());
 		int	numeroInfoRil = view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_INFORIL_OPERANDO, Costanti.MIN, ((Sensore) listaSensori.getElemento(numeroSensore)).size()-1);
 		//assegno infoRilevabile scelta
-		
-		
 		
 		return model.setOperandoSensore(listaSensori, numeroSensore, numeroInfoRil);
 	}
@@ -706,7 +704,7 @@ public class ControlInserimento {
 		try {
 			
 			ListaCategorie categorieCaricate = GestioneFile.caricaCategoriaSensoriDaFile(path,type);
-			if(!listaCategorie.isEmpty())
+			if(!categorieCaricate.isEmpty())
 			{
 				for(int c=0;c<categorieCaricate.size();c++)
 					{
@@ -734,6 +732,7 @@ public class ControlInserimento {
 						}
 					}
 			
+				
 			}
 			else
 			{
@@ -776,6 +775,7 @@ public class ControlInserimento {
 			e.printStackTrace();
 		}
 		return listaCategorie;
+		
 	}
 	
 	public Immobile scegliImmobile(Dati dati)

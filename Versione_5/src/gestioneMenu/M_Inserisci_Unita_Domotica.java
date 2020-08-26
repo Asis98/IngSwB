@@ -11,7 +11,7 @@ public class M_Inserisci_Unita_Domotica implements MenuCommand{
 	public void esegui(Dati dati) {
 		
 		Immobile immobile = dati.getImmobile();
-		dati.setImmobile(controllerInserimento.inserimentoUnitaDomotica(immobile));
+		dati.setImmobile(controllerInserimento.inserimentoUnitaDomotica(immobile, dati));
 		
 	}
 

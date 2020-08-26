@@ -10,7 +10,7 @@ public class M_Crea_Regola implements MenuCommand{
 	@Override
 	public void esegui(Dati dati) {
 		// TODO Auto-generated method stub
-		controllerInserimento.inserimentoRegole(dati.getImmobile());
+		controllerInserimento.inserimentoRegole(dati.getImmobile(), dati);
 	}
 
 

@@ -46,13 +46,13 @@ public class UserInterface {
 	public void AD_stampa_menu_unita_rilevazione()
 	{
 		MyMenu menuGestioneStatoUnitaRilevazione = new MyMenu(TitoliMenu.TITOLOSTATOUNITARIL, VociMenu.VOCISTATOUNITARILEVAZIONE);
-		menuGestioneStatoUnitaRilevazione.stampaMenu();
+		System.out.println(menuGestioneStatoUnitaRilevazione.stampaMenu());
 	}
 	
 	public void AD_stampa_menu_regole()
 	{
 		MyMenu menuRegole= new MyMenu(TitoliMenu.TITOLOATTIVADISATTIVA, VociMenu.VOCISTATOREGOLE);
-		menuRegole.stampaMenu();
+		System.out.println(menuRegole.stampaMenu());
 	}
 	
 	
