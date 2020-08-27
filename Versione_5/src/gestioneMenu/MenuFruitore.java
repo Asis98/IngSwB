@@ -10,7 +10,7 @@ public class MenuFruitore implements MenuCommand {
 	
 	@Override
 	public void esegui(Dati dati) {
-		// TODO Auto-generated method stub
+		
 		fruitore.menuPersonalizzato(dati);
 	}
 

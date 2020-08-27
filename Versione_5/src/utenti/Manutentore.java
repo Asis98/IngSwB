@@ -38,11 +38,12 @@ private String nomeUtente;
 
 	@Override
 	public void menuPersonalizzato(Dati dati) {
-		// TODO Auto-generated method stub
-		MyMenu menuManutentore= new MyMenu(TitoliMenu.TITOLOMANUTENTORE,VociMenu.VOCIMANUTENTORE);
-		System.out.println(menuManutentore.stampaMenu());
+		
 		int scelta = 0;
 		do {
+			MyMenu menuManutentore= new MyMenu(TitoliMenu.TITOLOMANUTENTORE,VociMenu.VOCIMANUTENTORE);
+			System.out.println(menuManutentore.stampaMenu());
+		
 			scelta =new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE);
 			MenuCommand targetOperation = MV_Manutentore
 				      .getOperation(scelta)
@@ -54,15 +55,19 @@ private String nomeUtente;
 
 	@Override
 	public void gestioneImmobileView(Dati dati) {
-		// TODO Auto-generated method stub
+	
+		int scelta = 0;
+		do {
 		MyMenu gestioneImmobileManutentore = new MyMenu(TitoliMenu.TITOLOMENUIMMOBILE, VociMenu.VOCIIMMOBILE);
 		System.out.println(gestioneImmobileManutentore.stampaMenu());
 		
-		MenuCommand targetOperation = MV_ImmobileAdmin
-			      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
-			      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 		
-		targetOperation.esegui(dati);
+			MenuCommand targetOperation = MV_ImmobileAdmin
+				      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
+				      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
+			
+			targetOperation.esegui(dati);
+		}while(scelta!=0);
 		
 		
 	}

@@ -19,6 +19,7 @@ public class MV_Manutentore {
     	menuManutentore.put(Case.INSERISCI_CATEGORIA_ATTUATORE, new M_inserisci_Categoria_Attuatore());
     	menuManutentore.put(Case.INSERISCI_CATEGORIA_SENSORE, new M_Inserisci_Categoria_Sensore());
     	menuManutentore.put(Case.STAMPA_CATEGORIE, new M_Stampa_Categorie());
+    	menuManutentore.put(Case.ESCI, new MenuHome());
     }
        
     public static Optional<MenuCommand> getOperation(Integer operator) 
