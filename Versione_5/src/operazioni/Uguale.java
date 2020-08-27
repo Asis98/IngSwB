@@ -4,7 +4,7 @@ import categorie.Valore;
 import categorie.ValoreNonNumerico;
 import categorie.ValoreNumerico;
 
-public class Uguale implements BoolFunct {
+public class Uguale extends BoolFunct {
 	
 	@Override
 	public boolean confronto(Valore a, Valore b) 

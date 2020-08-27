@@ -1,10 +1,11 @@
+
 package operazioni;
 
 import categorie.Valore;
 
-public interface BoolFunct {
+public abstract class BoolFunct {
 	
-	boolean confronto(Valore a, Valore b);
+	public abstract boolean confronto(Valore a, Valore b);
 
 		
 }

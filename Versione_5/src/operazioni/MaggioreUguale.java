@@ -3,7 +3,7 @@ package operazioni;
 import categorie.Valore;
 import categorie.ValoreNumerico;
 
-public class MaggioreUguale implements BoolFunct {
+public class MaggioreUguale extends BoolFunct {
 	
 	@Override
 	public boolean confronto(Valore a, Valore b) {

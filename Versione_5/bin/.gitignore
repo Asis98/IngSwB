@@ -1,5 +1,14 @@
-/sistema_domotico/
+/ambiente/
+/categorie/
 /costanti/
-/utility/
-/utenti/
 /gestioneMenu/
+/inputUtente/
+/liste/
+/operazioni/
+/regole/
+/rilevazione/
+/sistema_domotico/
+/test/
+/time/
+/utenti/
+/utility/
