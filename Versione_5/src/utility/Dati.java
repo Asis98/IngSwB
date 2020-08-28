@@ -4,8 +4,10 @@ import ambiente.Immobile;
 import categorie.Categoria;
 import categorie.CategoriaAttuatori;
 import categorie.CategoriaSensori;
+import costanti.NomiFile;
 import liste.ListaCategorie;
 import liste.ListaImmobili;
+import sistema_domotico.GestioneFile;
 
 public class Dati {
 	
@@ -18,9 +20,9 @@ public class Dati {
 	
 	public Dati(Immobile immobile)
 	{
-		listaCategorieAttuatori = new ListaCategorie();
-		listaUnitaImmobiliari = new ListaImmobili();
-		listaCategorieSensori = new ListaCategorie();
+		listaCategorieAttuatori = GestioneFile.istanziaDaFile(NomiFile.NOME_FILE_LISTA_CATEGORIE_ATTUATORI, ListaCategorie.class);
+		listaUnitaImmobiliari = GestioneFile.istanziaDaFile(NomiFile.NOME_FILE_UNITA_IMMOBILIARE, ListaImmobili.class);
+		listaCategorieSensori = GestioneFile.istanziaDaFile(NomiFile.NOME_FILE_LISTA_CATEGORIE_SENSORI, ListaCategorie.class);
 		categoriaSensori = new CategoriaSensori();
 		categoriaAttuatori = new CategoriaAttuatori();
 		this.immobile = immobile;

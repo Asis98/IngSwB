@@ -23,6 +23,14 @@ public class Immobile {
 		this.listaRegole= new ListaRegole();
 	}
 	
+	public Immobile()
+	{
+		this.unitList= new ListaUnitaDomotiche();
+		this.listaAttuatori= new ListaUnitaRilevazione();
+		this.listaSensori= new ListaUnitaRilevazione();
+		this.listaRegole= new ListaRegole();
+	}
+	
 	public Immobile(UnitaImmobiliare unita, ListaUnitaDomotiche unitList, ListaUnitaRilevazione listaAttuatori, ListaUnitaRilevazione listaSensori,ListaRegole listaRegole)
 	{
 		this.unita= unita;

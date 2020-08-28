@@ -17,7 +17,7 @@ public class MV_ImmobileAdmin {
     	gestioneImmobileManutentore.put(Case.VISUALIZZA_CATEGORIE, new M_Visualizza_Categorie());
     	gestioneImmobileManutentore.put(Case.STAMPA_SENSORI_ATTUATORI, new M_Stampa_Sensori_Attuatori());
     	gestioneImmobileManutentore.put(Case.CARICA_REGOLE, new M_Carica_Regole());
-    	//per esci utilizzeremo un do while
+    	gestioneImmobileManutentore.put(Case.ESCI, new MenuManutentore());
     }
     
     public static Optional<MenuCommand> getOperation(Integer operator) 

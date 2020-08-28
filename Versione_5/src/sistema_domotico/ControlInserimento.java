@@ -778,24 +778,23 @@ public class ControlInserimento {
 		
 	}
 	
-	public Immobile scegliImmobile(Dati dati)
+	public void scegliImmobile(Dati dati)
 	{
-		Immobile immobile = null;
-		
 		if(dati.getListaUnitaImmobiliari().isEmpty())
 		{
+			
 			view.stampaMessaggio(Messaggi.LISTA_IMMOBILI_VUOTA);
-			dati.setListaUnitaImmobiliari(dati.getListaUnitaImmobiliari());
-			immobile = dati.getListaUnitaImmobiliari().getImmobile(Costanti.MIN);
+			dati.setListaUnitaImmobiliari(inserisciUnitaImmobiliare(dati.getListaUnitaImmobiliari()));
+			Immobile immobile = dati.getListaUnitaImmobiliari().getImmobile(Costanti.MIN);
 		}
 		else {
-				view.stampaMessaggio(dati.getListaUnitaImmobiliari().stampaListaUnitaImmobiliari());
-				int numeroUnitaImmobiliare = view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_NUMERO_IMMOBILE, 
-						Costanti.MIN, ((dati.getListaUnitaImmobiliari().size())-1));
-				immobile = dati.getListaUnitaImmobiliari().getImmobile(numeroUnitaImmobiliare);
+			view.stampaMessaggio(dati.getListaUnitaImmobiliari().stampaListaUnitaImmobiliari());
+			int numeroUnitaImmobiliare = view.inputInteriConMinimo(Messaggi.MESSAGGIO_INSERIMENTO_NUMERO_IMMOBILE, 
+					Costanti.MIN, ((dati.getListaUnitaImmobiliari().size())-1));
+			Immobile immobile = dati.getListaUnitaImmobiliari().getImmobile(numeroUnitaImmobiliare);
+			dati.setImmobile(immobile);
 		}
-		
-		return immobile;
+	
 	}
 	
 
