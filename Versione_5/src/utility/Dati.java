@@ -1,5 +1,7 @@
 package utility;
 
+import java.util.Arrays;
+
 import ambiente.Immobile;
 import categorie.Categoria;
 import categorie.CategoriaAttuatori;
@@ -51,6 +53,14 @@ public class Dati {
 	}
 	public Immobile getImmobile() {
 		return immobile;
+	}
+	
+	public void salva()
+	{
+		GestioneFile.salvaFile(NomiFile.PATH,Arrays.asList(
+				listaCategorieAttuatori,
+				listaCategorieSensori,
+				listaUnitaImmobiliari));
 	}
 	
 	

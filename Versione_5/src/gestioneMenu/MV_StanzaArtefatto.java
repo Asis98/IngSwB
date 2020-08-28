@@ -12,6 +12,7 @@ public class MV_StanzaArtefatto {
     static {
     	scelta_stanza_artefatto.put(Case.INSERISCI_STANZA, new M_Inserisci_Stanza());
     	scelta_stanza_artefatto.put(Case.INSERISCI_ARTEFATTO, new M_Inserisci_Artefatto());
+    	scelta_stanza_artefatto.put(Case.ESCI, new MenuImmobileAdmin());
     }
        
     public static Optional<MenuCommand> getOperation(Integer operator) 

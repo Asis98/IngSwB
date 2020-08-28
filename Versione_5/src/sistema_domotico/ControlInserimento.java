@@ -86,12 +86,12 @@ public class ControlInserimento {
 	
 	public void inserisciStanza(Immobile immobile)
 	{
+		ListaUnitaDomotiche unitList = immobile.getUnitList();
 		if(immobile.getUnitList().isEmpty())
 			view.stampaMessaggio(Messaggi.IMMOBILE_NON_ESISTENTE);
 		else
 		{
 			//inserimentoStanza
-			ListaUnitaDomotiche unitList = immobile.getUnitList();
 			String nomeStanza = view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_UNITA_DOMOTICA);
 			unitList = model.inserisciStanza(unitList, nomeStanza);
 			if(!model.verificaPresenzaUnitaD(unitList, nomeStanza))
@@ -99,6 +99,7 @@ public class ControlInserimento {
 			else
 				view.stampaMessaggio(Messaggi.MESSAGGIO_ELEMENTO_ESISTENTE);
 		}
+		immobile.setUnitList(unitList);
 	}
 	
 	public void inserisciArtefatto(Immobile immobile)
@@ -200,7 +201,7 @@ public class ControlInserimento {
 		do
 		{
 			ModalitaOperativa modOp = new ModalitaOperativa(view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_NOME_MODALITA_OPERATIVA), view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_DESCRIZIONE_MODALITA_OPERATIVA));
-			if(model.verificaModOp(modOp, categoria))
+			if(!model.verificaModOp(modOp, categoria))
 			{
 				String scelta= view.InputStringaNonVuota(Messaggi.MESSAGGIO_INSERIMENTO_PARAMETRO);
 				if(scelta.equalsIgnoreCase(Costanti.SI))
@@ -727,6 +728,7 @@ public class ControlInserimento {
 							{
 								CategoriaAttuatori categoria = new CategoriaAttuatori();
 								categoria = (CategoriaAttuatori) categorieCaricate.getElemento(c);
+								view.stampaMessaggio(Costanti.CATEGORIAFILE + categorieCaricate.getElemento(c).getNomeCategoria());
 								listaCategorie.addCategoria(helpInserisciModalitaOperative(categoria));
 							}
 						}

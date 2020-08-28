@@ -17,6 +17,8 @@ public class Main2 {
 		MenuHome menuHome = new MenuHome();
 		menuHome.esegui(dati);
 		
+		dati.salva();
+		
 	}
 	
 	
