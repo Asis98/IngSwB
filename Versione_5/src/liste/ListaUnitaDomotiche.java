@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ambiente.UnitaDomotica;
-import ambiente.UnitaImmobiliare;
 
 public class ListaUnitaDomotiche implements Iterable<UnitaDomotica>{
 

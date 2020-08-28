@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import ambiente.Immobile;
-import ambiente.UnitaImmobiliare;
 import costanti.Costanti;
 
 

@@ -3,7 +3,6 @@ package liste;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ambiente.UnitaImmobiliare;
 import regole.Regola;
 import regole.StatoRegola;
 
