@@ -17,6 +17,7 @@ class TestListaUnitaDomotiche {
 		Assert.assertEquals(risultato, lista.verificaPresenzaUnitaDomotica(nomeUnitaDaCercare, Stanza.class));
 	}
 	
+	@Test
 	//test lunghezzaArrayList = 1
 	void test2() {
 		ListaUnitaDomotiche lista = new ListaUnitaDomotiche();
@@ -26,6 +27,7 @@ class TestListaUnitaDomotiche {
 		Assert.assertEquals(risultato, lista.verificaPresenzaUnitaDomotica(nomeUnitaDaCercare, Stanza.class));
 	}
 	
+	@Test
 	//test lunghezzaArrayList > 1 + key presente
 	void test3() {
 		ListaUnitaDomotiche lista = new ListaUnitaDomotiche();

@@ -18,6 +18,7 @@ public class Main2 {
 		menuHome.esegui(dati);
 		
 		dati.salva();
+	
 		
 	}
 	

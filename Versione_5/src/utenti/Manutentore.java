@@ -62,7 +62,7 @@ private String nomeUtente;
 		System.out.println(gestioneImmobileManutentore.stampaMenu());
 		
 		
-			MenuCommand targetOperation = MV_ImmobileAdmin
+		MenuCommand targetOperation = MV_ImmobileAdmin
 				      .getOperation(new DatiUtente().leggiIntero(Messaggi.SCEGLI_VOCE))
 				      .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 			
